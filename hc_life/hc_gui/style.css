@@ -1,0 +1,13 @@
+/* General body styling to remove margin and ensure full viewport coverage */
+body {
+    margin: 0;
+    height: 60vh;
+    width: 60vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #000; /* Sets the background color of the entire page/view to black */
+    color: #fff; /* Set default font color to white */
+    font-family: Arial, sans-serif; /* Sets a clean, modern font */
+}
+

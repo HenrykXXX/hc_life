@@ -1,0 +1,29 @@
+{
+  "assets": {
+    "hc_core": {
+      "enabled": true,
+      "restartOnChange": false
+    },
+    "hc_gui": {
+      "enabled": true,
+      "restartOnChange": true
+    }
+  },
+  "serverUpdateChannel": "recommended",
+  "systemResources": [
+    "basic-gamemode",
+    "map-skater",
+    "chat",
+    "playernames",
+    "mapmanager",
+    "spawnmanager",
+    "sessionmanager",
+    "baseevents",
+    "hardcap",
+    "webpack",
+    "yarn"
+  ],
+  "name": "hc_life",
+  "createdAt": "2024-04-08T21:41:39.432Z",
+  "variables": {}
+}
