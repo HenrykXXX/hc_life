@@ -1,30 +1,3 @@
--- local teleportLocation = vector3(1200.0, 5000.0, 110.0)  -- Change coordinates to your desired location
-local teleportLocation = vector3(-1500.0, -1000.0, 110.0)  -- Change coordinates to your desired location
-
-AddEventHandler('playerSpawned', function(spawn)
-    -- Teleport the player to the specified location after spawning
-    teleportPlayerToGround(teleportLocation.x, teleportLocation.y, teleportLocation.z)
-end)
-
-RegisterNetEvent('baseevents:onPlayerKilled')
-AddEventHandler('baseevents:onPlayerKilled', function()
-    -- Teleport the player to the specified location after death (note: might need a delay)
-    Citizen.Wait(5000)  -- Delay to ensure player is ready to be teleported, adjust as necessary
-    teleportPlayerToGround(teleportLocation.x, teleportLocation.y, teleportLocation.z)
-end)
-
--- Function to teleport player to a position and ensure they are on the ground
-function teleportPlayerToGround(x, y, z)
-    local ped = PlayerPedId()  -- Get the player's ped
-    local groundZ = 0.0
-    local foundGround, groundZ = GetGroundZFor_3dCoord(x, y, z + 999.0, 0)  -- Attempt to find the ground level
-    if foundGround then
-        SetEntityCoords(ped, x, y, groundZ + 1.0, false, false, false, true)  -- Place the player at the ground level
-    else
-        SetEntityCoords(ped, x, y, z, false, false, false, true)  -- Use the provided Z if ground not found
-    end
-end
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(5000) -- Adjust timing based on performance needs

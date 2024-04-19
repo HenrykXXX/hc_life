@@ -7,6 +7,14 @@
     "hc_gui": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "hc_spawn": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "hc_com": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+#spawn-menu {
+    position: absolute;
+    width: 20%;
+    bottom: 20px;
+    left: 20px;
+    padding: 20px;
+    background-color: #0F0F0F;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+}
+
+#spawn-menu button {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
