@@ -16,13 +16,13 @@ function selectWeapon() {
 }
 
 window.addEventListener('message', function(event) {
-    if (event.data.type === "toggleVisibility") {
-        document.body.style.display = event.data.show ? 'flex' : 'none';
+    if (event.data.type === "show") {
+        document.body.style.display = 'flex' ;
     }
 });
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'e' || event.keyCode === 69) {  // 'E' key
+    if (event.key === 'Backspace' || event.keyCode === 8) {
         document.body.style.display = 'none';
         fetch(`https://${GetParentResourceName()}/HideWeaponSelector`, {
             method: 'POST'

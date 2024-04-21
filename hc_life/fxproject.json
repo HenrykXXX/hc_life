@@ -4,15 +4,19 @@
       "enabled": true,
       "restartOnChange": false
     },
-    "hc_gui": {
-      "enabled": true,
-      "restartOnChange": true
-    },
     "hc_spawn": {
       "enabled": true,
       "restartOnChange": true
     },
     "hc_com": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "hc_weaponSelector": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "hc_km": {
       "enabled": true,
       "restartOnChange": true
     }

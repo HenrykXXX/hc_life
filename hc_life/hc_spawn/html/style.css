@@ -5,23 +5,30 @@ body {
     background-color: transparent;
 }
 
+h1 {
+    align-self: center;
+    font-size: 30px;
+    color: white;
+}
+
 #spawn-menu {
     position: absolute;
     width: 20%;
     bottom: 20px;
     left: 20px;
-    padding: 20px;
+    padding: 10px, 20px;
     background-color: #0F0F0F;
     border-radius: 3px;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
 #spawn-menu button {
-    margin: 20px;
-    padding: 20px;
+    margin: 10px;
+    padding: 15px;
     background-color: #fff;
     border: none;
+    border-radius:  3px;
     cursor: pointer;
-    width: 100%;
+    font-size: 20px;
 }

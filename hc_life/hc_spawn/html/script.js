@@ -15,7 +15,7 @@ function selectSpawn(index) {
 window.addEventListener('message', event => {
     const item = event.data;
     if (item.type === 'show') {
-        document.getElementById('spawn-menu').style.display = 'block';
+        document.getElementById('spawn-menu').style.display = 'flex';
     } else if (item.type === 'hide') {
         document.getElementById('spawn-menu').style.display = 'none';
     }

@@ -19,7 +19,7 @@ RegisterNUICallback('selectSpawn', function(data, cb)
     cb('ok')
 end)
 
-local teleportLocation = vector3(-1500.0, -1000.0, 20.0)  -- Change coordinates to your desired location
+local teleportLocation = vector3(-1500.0, -1000.0, 10.0)  -- Change coordinates to your desired location
 
 AddEventHandler('playerSpawned', function()
     hc.com.teleportPlayerToGround(teleportLocation.x, teleportLocation.y, teleportLocation.z)

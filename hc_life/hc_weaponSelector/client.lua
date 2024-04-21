@@ -4,8 +4,7 @@ function ShowWeaponSelector()
     bMenu = true
     SetNuiFocus(true, true)
     SendNUIMessage({
-        type = "toggleVisibility",
-        show = true
+        type = "show",
     })
 end
 
@@ -15,21 +14,12 @@ RegisterNUICallback('selectWeapon', function(data, cb)
 end)
 
 RegisterNUICallback('HideWeaponSelector', function(data, cb)
-    SendNUIMessage({
-        type = "toggleVisibility",
-        show = false
-    })
     bMenu = false
     cb('ok')
-    print("d")
     SetNuiFocus(false, false)
 end)
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if IsControlJustPressed (0, 38) then -- E key
-            ShowWeaponSelector()
-        end
-    end
+RegisterNetEvent('hc:showWeaponSelector')
+AddEventHandler('hc:showWeaponSelector', function()
+    ShowWeaponSelector()
 end)

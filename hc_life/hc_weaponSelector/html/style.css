@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: none;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+#weapon-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 20%;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #0F0F0F;
+    border-radius: 3px;
+    justify-items: center;
+}
+
+#weapon-list select {
+    box-sizing: border-box;
+    margin: 20px;
+    background-color: transparent;
+    border: solid;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+    border-color: white;;
+}
+
+#weapon-list button {
+    box-sizing: border-box;
+    margin: 20px;
+    padding: 20px;
+    background-color: transparent;
+    border: solid;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+    border-color: white;;
+}
+
