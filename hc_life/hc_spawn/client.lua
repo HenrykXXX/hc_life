@@ -1,10 +1,10 @@
 local hc = exports.hc_com.hc()
 
 local spawnPoints = {
-    {x = 200.0, y = 200.0, z = 20.0},
-    {x = 300.0, y = 300.0, z = 20.0},
-    {x = 400.0, y = 400.0, z = 20.0},
-    {x = 1200.0, y = 5000.0, z = 20.0}
+    {x = -1661.0, y = -1037.0, z = 14.0},
+    {x = 227.0, y = 214.0, z = 107.0},
+    {x = 1695.0, y = 4935.0, z = 43.0},
+    {x = -192.0, y = 6206.0, z = 32.0}
 }
 
 -- NUI Callback from JavaScript
@@ -12,7 +12,8 @@ RegisterNUICallback('selectSpawn', function(data, cb)
     local spawnIdx = data.spawnIndex
     if spawnPoints[spawnIdx] then
         local pos = spawnPoints[spawnIdx]
-        hc.com.teleportPlayerToGround(pos.x, pos.y, pos.z)
+        SetEntityCoords(PlayerPedId() , pos.x, pos.y, pos.z, false, false, false, false)
+        --hc.com.teleportPlayerToGround(pos.x, pos.y, pos.z)
         SetNuiFocus(false, false)
         SendNUIMessage({type = 'hide'})
     end

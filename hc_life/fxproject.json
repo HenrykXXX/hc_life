@@ -19,6 +19,10 @@
     "hc_km": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "[dev]\\hc_cords": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",
