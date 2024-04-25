@@ -4,6 +4,12 @@ game 'gta5'
 author 'HenrykXXX'
 version '1.0.0'
 
-client_script 'client.lua'
-server_script 'server.lua'
-shared_script 'shared.lua'
+client_scripts {
+    'client.lua',
+    'client/inventory.lua'
+}
+
+server_scripts {
+    'server.lua',
+    'server/inventory.lua'
+}

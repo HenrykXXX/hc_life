@@ -23,6 +23,22 @@
     "[dev]\\hc_cords": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "[dev]\\hc_tt": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "[dev]\\hc_it": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "hc_damage": {
+      "enabled": true,
+      "restartOnChange": true
+    },
+    "hc_fruitFarm": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",
