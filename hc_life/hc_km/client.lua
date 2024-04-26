@@ -5,6 +5,12 @@ local keyBindings = {
         description = 'Open Weapon Selector',
         defaultKey = 'F10',
         event = 'hc:showWeaponSelector'
+    },
+    {
+        command = "hc.core.showInventory",
+        description = 'Open Inventory',
+        defaultKey = 'I',
+        event = 'hc:core:showInventory'
     }
 }
 

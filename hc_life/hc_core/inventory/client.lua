@@ -25,3 +25,30 @@ end
 RegisterCommand('hc.core.getStats', function()
     requestPlayerStats()
 end, false)  -- false indicates this command does not require admin rights
+
+-- Trigger this function to request the inventory data from the server
+function requestInventoryData()
+    print("client show")
+    TriggerServerEvent('hc:core:inventory:show')
+end
+
+RegisterNUICallback('hideInventory', function(data, cb)
+    cb('ok')
+    SetNuiFocus(false, false)
+end)
+
+RegisterNetEvent('hc:core:showInventory')
+AddEventHandler('hc:core:showInventory', function()
+    requestInventoryData()
+end)
+
+RegisterNetEvent('hc:core:receiveInventoryData')
+AddEventHandler('hc:core:receiveInventoryData', function(inventoryData)
+    SetNuiFocus(true, true)
+    SendNUIMessage({
+        type = "show",
+        inventory = inventoryData.inventory,
+        money = inventoryData.money,
+        bankMoney = inventoryData.bankMoney
+    })
+end)

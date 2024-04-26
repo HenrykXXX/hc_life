@@ -39,6 +39,10 @@
     "hc_fruitFarm": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "hc_shops": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",
