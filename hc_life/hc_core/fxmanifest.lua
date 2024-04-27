@@ -8,14 +8,20 @@ client_scripts {
     'client.lua',
 
     --inventory--
-    'inventory/client.lua'
+    'inventory/client.lua',
+
+    --time--
+    'time/client.lua'
 }
 
 server_scripts {
     'server.lua',
 
     --inventory--
-    'inventory/server.lua'
+    'inventory/server.lua',
+
+    --time--
+    'time/server.lua'
 }
 
 ui_page 'inventory/html/index.html'

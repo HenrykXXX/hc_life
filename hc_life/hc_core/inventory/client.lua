@@ -28,7 +28,6 @@ end, false)  -- false indicates this command does not require admin rights
 
 -- Trigger this function to request the inventory data from the server
 function requestInventoryData()
-    print("client show")
     TriggerServerEvent('hc:core:inventory:show')
 end
 

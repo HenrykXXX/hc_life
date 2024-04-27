@@ -138,6 +138,16 @@ AddEventHandler('playerDropped', function(reason)
 end)
 
 -- Server-side Lua to trigger the inventory display
+RegisterNetEvent('hc:core:showMarket')
+AddEventHandler('hc:core:showMarket', function()
+    local src = source
+    TriggerClientEvent('hc:shops:receiveInventoryData', src, {
+        inventory = playerStats[src].inventory,
+        money = playerStats[src].money,
+        bankMoney = playerStats[src].bankMoney
+    })
+end)
+
 RegisterNetEvent('hc:core:inventory:show')
 AddEventHandler('hc:core:inventory:show', function()
     local src = source

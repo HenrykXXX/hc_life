@@ -5,9 +5,17 @@ author 'You'
 version '1.0.0'
 
 client_scripts {
-    'market/client.lua'
+    'client.lua'
 }
 server_scripts {
-    'market/server.lua'
+    'server.lua'
 }
+
+files {
+    'html/index.html',
+    'html/style.css',
+    'html/script.js'
+}
+
+ui_page 'html/index.html'
 

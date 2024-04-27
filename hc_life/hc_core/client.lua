@@ -9,7 +9,7 @@ Citizen.CreateThread(function()
         for i = 1, #peds do
             local ped = peds[i]
             pos = GetEntityCoords(ped)
-            GiveWeaponToPed(ped, `WEAPON_CARBINERIFLE`, 300, false, true)
+            GiveWeaponToPed(ped, `WEAPON_PUMPSHOTGUN`, 300, false, true)
             if not IsPedAPlayer(ped) then
                 local pedGroup = GetPedRelationshipGroupHash(ped)
                 if pedGroup ~= `HATES_EVERYONE` then
