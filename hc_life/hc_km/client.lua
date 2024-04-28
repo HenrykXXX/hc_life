@@ -12,12 +12,6 @@ local keyBindings = {
         defaultKey = 'I',
         event = 'hc:core:showInventory'
     },
-    {
-        command = "hc.shops.showMarket",
-        description = 'Open Market',
-        defaultKey = 'O', -- o just for now
-        event = 'hc:shops:showMarket'
-    }
 }
 
 
