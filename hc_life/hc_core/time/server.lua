@@ -11,7 +11,7 @@ Citizen.CreateThread(function()
 
         if minute >= 60 then
             minute = 0
-            hour = hour + 1
+            hour = 14 -- h + 1
             if hour >= 24 then
                 hour = 0
             end

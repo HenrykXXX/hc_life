@@ -1,9 +1,11 @@
 Citizen.CreateThread(function()
     -- Configuration array for NPCs
     local npcs = {
-        {npcName = "Market Vendor", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-192.0, 6210.0, 31.5), npcHeading = 180.0},
-        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6202.0, 31.5), npcHeading = 360.0},
-        -- Add more NPCs in the same format
+        {npcName = "Market Vendor", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-192.0, 6212.0, 31.5), npcHeading = 180.0},
+        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6204.0, 31.5), npcHeading = 360.0},
+        {npcName = "Car Dealer", npcEvent = "carDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0},
+        
+         -- Add more NPCs in the same format
     }
 
     -- Load and spawn each NPC from the configuration, and create map markers
@@ -20,6 +22,11 @@ Citizen.CreateThread(function()
         SetEntityInvincible(ped, true)  -- NPC won't die
         SetBlockingOfNonTemporaryEvents(ped, true)  -- NPC won't react to the environment
 
+        SetPedFleeAttributes(ped, 0, 0)  -- NPC won't flee.
+        SetPedCombatAttributes(ped, 46, true)  -- NPC won't engage in combat.
+        SetPedSeeingRange(ped, 0.0)  -- NPC won't react to sight.
+        SetPedHearingRange(ped, 0.0)  -- NPC won't react to sounds.
+        
         -- Create a blip on the map for the NPC
         local blip = AddBlipForCoord(npc.npcCoords.x, npc.npcCoords.y, npc.npcCoords.z)
         SetBlipSprite(blip, 280) -- Icon style (change as needed)
@@ -41,6 +48,7 @@ Citizen.CreateThread(function()
                 DrawText3D(npc.npcCoords.x, npc.npcCoords.y, npc.npcCoords.z + 1.0, "[E] Interact with " .. npc.npcName)
 
                 if IsControlJustReleased(1, 51) then  -- E key
+                    print(npc.npcEvent)
                     TriggerEvent(npc.npcEvent)  -- Triggering the configured event
                 end
             end

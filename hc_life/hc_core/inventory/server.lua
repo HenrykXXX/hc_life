@@ -1,67 +1,45 @@
-local playerStats = {}
+--local HC = exports.hc_core.GetHC()
 
-AddEventHandler('playerJoining', function()
-    local src = source
-    playerStats[src] = {
-        money = 1000,       -- Default money
-        bankMoney = 5000,   -- Default bank money
-        inventory = {},     -- Empty inventory
-        licenses = {}       -- Empty licenses
-    }
-    print("hc:core: Player stats initialized for player ID " .. src)
-end)
-
-function hasItemAmount(playerId, itemName, amount)
-    print("db")
-    print(playerId)
-    local inventory = playerStats[playerId].inventory
+function HC:HasItemAmount(playerId, itemName, amount, cb)
+    local inventory = HC:GetPlayerData(playerId).inventory
     
     for _, item in ipairs(inventory) do
         if item[1] == itemName and item[2] >= amount then
-            return true
+            cb(true)
         end
     end
-    return false
+    cb(false)
 end
 
--- In the inventory resource
-RegisterNetEvent('hc:core:inventory:checkItem')
-AddEventHandler('hc:core:inventory:checkItem', function(playerId, itemName, amount, cb)
-    local hasEnough = hasItemAmount(playerId, itemName, amount)
-    cb(hasEnough)  -- Use a callback to send the response
-end)
+function HC:AddMoney(playerId, amount)
+    local playerData = HC:GetPlayerData(playerId)
 
-function addMoney(playerId, amount)
-    playerStats[playerId].money = (playerStats[playerId].money or 0) + amount
+    playerData.money = (playerData.money or 0) + amount
 end
 
-RegisterNetEvent('hc:core:inventory:addMoney')
-AddEventHandler('hc:core:inventory:addMoney', function(playerId, amount)
-    addMoney(playerId, amount)
-end)
+function HC:RemoveMoney(playerId, amount)
+    local playerData = HC:GetPlayerData(playerId)
+
+    playerData.money = (playerData.money or 0) - amount
+end
+
+function HC:GetMoney(playerId, amount)
+    local playerData = HC:GetPlayerData(playerId)
+    
+    return playerData.money
+end
 
 
--- Function to get player stats, callable by the client
-RegisterNetEvent('hc:core:getPlayerStats')
-AddEventHandler('hc:core:getPlayerStats', function()
-    local src = source
-    if playerStats[src] then
-        TriggerClientEvent('hc:core:receivePlayerStats', src, playerStats[src])
-    else
-        print("hc:core: No player stats found for player ID " .. src)
-    end
-end)
-
--- Function to add an item to the player's inventory, callable by the client
-RegisterNetEvent('hc:core:inventory:addItem')
-AddEventHandler('hc:core:inventory:addItem', function(itemName, amount)
-    local src = source
-    if not playerStats[src] then
+function HC:AddItem(id, itemName, amount)
+    local src = id
+    
+    local playerStats = HC:GetPlayerData(id)
+    if not playerStats then
         print("hc:core: No player stats found for player ID " .. src)
         return
     end
 
-    local inventory = playerStats[src].inventory
+    local inventory = playerStats.inventory
     local itemFound = false
 
     -- Check if the item already exists in the inventory
@@ -80,20 +58,19 @@ AddEventHandler('hc:core:inventory:addItem', function(itemName, amount)
 
     TriggerClientEvent('hc:core:inventoryUpdated', src, inventory) -- Optional: Notify the client about the updated inventory
     print("hc:core: Item " .. itemName .. " added to player ID " .. src .. " inventory.")
-end)
+end
 
--- Function to remove an item from the player's inventory, callable by the client
-RegisterNetEvent('hc:core:inventory:removeItem')
-AddEventHandler('hc:core:inventory:removeItem', function(playerId, itemName, amount)
+function HC:RemoveItem(playerId, itemName, amount)
     local src = playerId
 
-    print("rem item")
-    if not playerStats[src] then
+    local playerStats = HC:GetPlayerData(src)
+
+    if not playerStats then
         print("hc:core: No player stats found for player ID " .. src)
         return
     end
 
-    local inventory = playerStats[src].inventory
+    local inventory = playerStats.inventory
     local itemFound = false
 
     -- Check if the item exists in the inventory
@@ -115,45 +92,26 @@ AddEventHandler('hc:core:inventory:removeItem', function(playerId, itemName, amo
     else
         print("hc:core: Item " .. itemName .. " removed from player ID " .. src .. " inventory.")
     end
-end)
-
--- Function to update player stats, callable by the client
-RegisterNetEvent('hc:core:updatePlayerStats')
-AddEventHandler('hc:core:updatePlayerStats', function(newStats)
-    local src = source
-    if playerStats[src] then
-        playerStats[src] = newStats
-        print("hc:core: Player stats updated for player ID " .. src)
-    end
-end)
-
-
--- Clean up player stats on player disconnect
-AddEventHandler('playerDropped', function(reason)
-    local src = source
-    if playerStats[src] then
-        playerStats[src] = nil
-        print("hc:core: Player stats removed for player ID " .. src)
-    end
-end)
+end
 
 -- Server-side Lua to trigger the inventory display
 RegisterNetEvent('hc:core:showMarket')
 AddEventHandler('hc:core:showMarket', function()
     local src = source
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
-        inventory = playerStats[src].inventory,
-        money = playerStats[src].money,
-        bankMoney = playerStats[src].bankMoney
+        inventory = HC:GetPlayerData(src).inventory,
+        money = HC:GetPlayerData(src).money,
+        bankMoney = HC:GetPlayerData(src).bankMoney
     })
 end)
 
 RegisterNetEvent('hc:core:inventory:show')
 AddEventHandler('hc:core:inventory:show', function()
     local src = source
+    print(HC:GetPlayerData(src).inventory)
     TriggerClientEvent('hc:core:receiveInventoryData', src, {
-        inventory = playerStats[src].inventory,
-        money = playerStats[src].money,
-        bankMoney = playerStats[src].bankMoney
+        inventory = HC:GetPlayerData(src).inventory,
+        money = HC:GetPlayerData(src).money,
+        bankMoney = HC:GetPlayerData(src).bankMoney
     })
 end)

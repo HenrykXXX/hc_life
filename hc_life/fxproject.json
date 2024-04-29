@@ -43,6 +43,10 @@
     "hc_shops": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "hc_vehicleDealer": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

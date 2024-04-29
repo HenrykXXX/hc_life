@@ -1,3 +1,5 @@
+local HC = exports.hc_core.GetHC()
+
 local Config = {
     ShopItems = {
         {itemname = "pineapple", price = 50},
@@ -7,23 +9,18 @@ local Config = {
 
 
 -- In the market resource
-function addMoney(src, amount)
-    TriggerEvent('hc:core:inventory:addMoney', src, amount)
-end
-
-
--- In the market resource
 function processItemSale(src, itemName, amount, price)
-    TriggerEvent('hc:core:inventory:checkItem', src, itemName, amount, function(hasEnough)
+    HC:HasItemAmount(src, itemName, amount, function(hasEnough)
         if not hasEnough then
             print("hc:core: Not enough " .. itemName .. " to sell.")
             return
         end
 
         -- Proceed with the transaction if the item check is successful
-        TriggerEvent('hc:core:inventory:removeItem', src, itemName, amount)
+        HC:RemoveItem(src, itemName, amount)
         local totalEarnings = price * amount
-        TriggerEvent("hc:core:inventory:addMoney", src, totalEarnings)
+        --TriggerEvent("hc:core:inventory:addMoney", src, totalEarnings)
+        HC:AddMoney(src, totalEarnings)
 
         TriggerClientEvent("hc:shops:updateMarket", src)
         print("hc:core: Player ID " .. src .. " sold " .. amount .. " " .. itemName .. " for " .. totalEarnings)

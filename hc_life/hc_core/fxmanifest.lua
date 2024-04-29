@@ -5,7 +5,7 @@ author 'HenrykXXX'
 version '1.0.0'
 
 client_scripts {
-    'client.lua',
+    'client/main.lua',
 
     --inventory--
     'inventory/client.lua',
@@ -18,7 +18,8 @@ client_scripts {
 }
 
 server_scripts {
-    'server.lua',
+    'server/main.lua',
+    "server/events.lua",
 
     --inventory--
     'inventory/server.lua',

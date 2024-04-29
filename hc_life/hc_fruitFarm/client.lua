@@ -50,7 +50,7 @@ function manageFruitCollection(fruit)
 
                 -- Delete the fruit
                 DeleteObject(fruit)
-                TriggerServerEvent('hc:core:inventory:addItem', 'pineapple', 1)
+                TriggerServerEvent('hc:ff:addItem', 'pineapple', 1)
                 break  -- Exit the loop once the fruit is collected
             end
         end
