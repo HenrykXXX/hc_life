@@ -20,7 +20,7 @@ AddEventHandler('carDealer:buyCar', function(car)
 
     local money = HC:GetMoney(source)
     if money >= car.price then
-        HC:RemoveMoney(car.price)
+        HC:RemoveMoney(source, car.price)
         TriggerClientEvent('carDealer:spawnCar', _source, car.carModel)
     else
         print("not enoguh money")
