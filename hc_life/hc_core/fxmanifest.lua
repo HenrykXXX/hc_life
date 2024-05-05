@@ -14,7 +14,10 @@ client_scripts {
     'time/client.lua',
 
     --mapmanager--
-    'mapmanager/client.lua'
+    'mapmanager/client.lua',
+
+    --vehicles--
+    'vehicles/client.lua'
 }
 
 server_scripts {
@@ -23,6 +26,9 @@ server_scripts {
 
     --inventory--
     'inventory/server.lua',
+
+    --vehicles--
+    'vehicles/server.lua',
 
     --time--
     'time/server.lua'

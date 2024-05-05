@@ -94,17 +94,6 @@ function HC:RemoveItem(playerId, itemName, amount)
     end
 end
 
--- Server-side Lua to trigger the inventory display
-RegisterNetEvent('hc:core:showMarket')
-AddEventHandler('hc:core:showMarket', function()
-    local src = source
-    TriggerClientEvent('hc:shops:receiveInventoryData', src, {
-        inventory = HC:GetPlayerData(src).inventory,
-        money = HC:GetPlayerData(src).money,
-        bankMoney = HC:GetPlayerData(src).bankMoney
-    })
-end)
-
 RegisterNetEvent('hc:core:inventory:show')
 AddEventHandler('hc:core:inventory:show', function()
     local src = source
@@ -114,4 +103,13 @@ AddEventHandler('hc:core:inventory:show', function()
         money = HC:GetPlayerData(src).money,
         bankMoney = HC:GetPlayerData(src).bankMoney
     })
+end)
+
+
+-- Register the command
+RegisterCommand("hc.core.addMoney", function(source, args, rawCommand)
+    local playerId = tonumber(args[1])
+    local amount = tonumber(args[2])
+
+    HC:AddMoney(playerId, amount)
 end)

@@ -48,3 +48,14 @@ AddEventHandler('hc:shops:market:sellItem', function(itemName, amount, cb)
     -- Process the sale through the processItemSale function
     processItemSale(src, itemName, amount, price)
 end)
+
+-- Server-side Lua to trigger the inventory display
+RegisterNetEvent('hc:shops:showMarket')
+AddEventHandler('hc:shops:showMarket', function()
+    local src = source
+    TriggerClientEvent('hc:shops:receiveInventoryData', src, {
+        inventory = HC:GetPlayerData(src).inventory,
+        money = HC:GetPlayerData(src).money,
+        bankMoney = HC:GetPlayerData(src).bankMoney
+    })
+end)

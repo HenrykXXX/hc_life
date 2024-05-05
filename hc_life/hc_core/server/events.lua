@@ -28,9 +28,10 @@ AddEventHandler('playerJoining', function()
     end
 
     HC.PlayerData[src] = {
-        money = 1000,       -- Default money
+        money = 100000,       -- Default money
         bankMoney = 5000,   -- Default bank money
         inventory = {},     -- Empty inventory
+        vehicles = {}
     }
     print("hc:core: Player stats initialized for player ID " .. src)
 end)

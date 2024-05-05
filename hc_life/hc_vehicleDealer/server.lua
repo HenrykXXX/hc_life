@@ -8,21 +8,27 @@ local carsForSale = {
     { carModel = "panto", price = 250000, trunkCapacity = 250 }
 }
 
-RegisterNetEvent('carDealer:getCars')
-AddEventHandler('carDealer:getCars', function()
+RegisterNetEvent('hc:vehDealer:getCars')
+AddEventHandler('hc:vehDealer:getCars', function()
     print("getCars")
-    TriggerClientEvent('carDealer:openMenu', source, carsForSale)
+    TriggerClientEvent('hc:vehDealer:openMenu', source, carsForSale)
 end)
 
-RegisterNetEvent('carDealer:buyCar')
-AddEventHandler('carDealer:buyCar', function(car)
+RegisterNetEvent('hc:vehDealer:buyCar')
+AddEventHandler('hc:vehDealer:buyCar', function(car)
     local _source = source
 
     local money = HC:GetMoney(source)
     if money >= car.price then
         HC:RemoveMoney(source, car.price)
-        TriggerClientEvent('carDealer:spawnCar', _source, car.carModel)
+        TriggerClientEvent('hc:vehDealer:spawnCar', _source, car.carModel)
     else
         print("not enoguh money")
     end
+end)
+
+RegisterNetEvent('hc:vehDealer:registerCar')
+AddEventHandler('hc:vehDealer:registerCar', function(veh)
+    print(veh)
+    HC:AddVehicle(source, veh)
 end)
