@@ -24,6 +24,9 @@ server_scripts {
     'server/main.lua',
     "server/events.lua",
 
+    --configuration--
+    "config/vehicles.lua",
+
     --inventory--
     'inventory/server.lua',
 
@@ -33,6 +36,7 @@ server_scripts {
     --time--
     'time/server.lua'
 }
+
 
 ui_page 'inventory/html/index.html'
 

@@ -20,14 +20,17 @@ function spawnFruitNearPosition()
     local radius = math.random() * spawnRadius
     local x = spawnPos.x + radius * math.cos(angle)
     local y = spawnPos.y + radius * math.sin(angle)
+
     local z = spawnPos.z
 
     --loadModel(fruitHash)
     
     local fruit = CreateObject(fruitHash, x, y, z, true, true, false)
+    --TriggerClientEvent('hc:ff:disableCollision', -1, fruit)
     --PlaceObjectOnGroundProperly(fruit)
     return fruit
 end
+
 
 -- Global table to keep track of spawned fruits
 local spawnedFruits = {}
@@ -35,7 +38,7 @@ local spawnedFruits = {}
 -- Main thread for spawning fruits
 CreateThread(function()
     while true do
-        Wait(1000)  -- Wait one second between spawns
+        Wait(500)  -- Wait one second between spawns
         if #spawnedFruits < maxFruits then
             local newFruit = spawnFruitNearPosition()
             table.insert(spawnedFruits, newFruit)
@@ -49,7 +52,7 @@ function checkAndCollectFruit(playerId)
 
     for i, fruit in ipairs(spawnedFruits) do
         local fruitPos = GetEntityCoords(fruit)
-        if #(playerPos - fruitPos) < 1.5 then  -- If player is close enough to collect the fruit
+        if #(playerPos - fruitPos) < 3 then  -- If player is close enough to collect the fruit
             -- Add the fruit to the player's inventory
             HC:AddItem(playerId, 'pineapple', 1)
             print("near fruit")
@@ -66,7 +69,7 @@ end
 -- Thread to check if players are near fruits and collect them
 CreateThread(function()
     while true do
-        Wait(500)  -- Check every 500ms
+        Wait(100)  -- Check every 500ms
         for _, playerId in ipairs(GetPlayers()) do
             checkAndCollectFruit(playerId)
         end

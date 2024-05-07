@@ -49,3 +49,13 @@ AddEventHandler('hc:ff:FruitCollected', function(fruit)
     -- Delete the fruit object
     DeleteObject(fruit)
 end)
+
+
+
+-- not used for now until problem solved --
+RegisterNetEvent('hc:ff:disableCollision')
+AddEventHandler('hc:ff:disableCollision', function(fruit)
+    local entity = NetworkGetEntityFromNetworkId(fruit)
+    SetEntityCollision(entity, false, false)
+    SetEntityInvincible(entity, true)
+end)

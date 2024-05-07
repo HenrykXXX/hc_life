@@ -6,7 +6,7 @@ window.addEventListener('message', function(event) {
         ul.innerHTML = '';
         cars.forEach(car => {
             const li = document.createElement('li');
-            li.textContent = `${car.carModel} - $${car.price}`;
+            li.textContent = `${car.name} - $${car.price}`;
             li.onclick = () => selectCar(car);
             ul.appendChild(li);
         });

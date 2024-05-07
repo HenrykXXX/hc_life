@@ -5,6 +5,10 @@ end)
 
 RegisterNetEvent('hc:vehDealer:openMenu')
 AddEventHandler('hc:vehDealer:openMenu', function(cars)
+    for _, veh in ipairs(cars) do
+        veh.name = GetDisplayNameFromVehicleModel(veh.model)
+    end
+    
     SendNUIMessage({
         type = "OPEN_MENU",
         cars = cars

@@ -1,5 +1,6 @@
 HC = {
     PlayerData = {},
+    Config = {},
     Vehicles = {}
 }
 

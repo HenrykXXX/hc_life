@@ -2,16 +2,17 @@ local HC = exports.hc_core.GetHC()
 
 -- server.lua or a script where you define cars
 local carsForSale = {
-    { carModel = "adder", price = 10000, trunkCapacity = 20 },
-    { carModel = "zentorno", price = 25000, trunkCapacity = 10 },
-    { carModel = "t20", price = 500000, trunkCapacity = 15 },
-    { carModel = "panto", price = 250000, trunkCapacity = 250 }
+    { model = "panto" }
 }
 
 RegisterNetEvent('hc:vehDealer:getCars')
 AddEventHandler('hc:vehDealer:getCars', function()
-    print("getCars")
-    TriggerClientEvent('hc:vehDealer:openMenu', source, carsForSale)
+    local vehicles = carsForSale
+
+    for _, veh in ipairs(carsForSale) do
+        veh.price = HC.Config.Vehicles.GetPrice(veh.model)
+    end
+    TriggerClientEvent('hc:vehDealer:openMenu', source, vehicles)
 end)
 
 RegisterNetEvent('hc:vehDealer:buyCar')
@@ -21,7 +22,7 @@ AddEventHandler('hc:vehDealer:buyCar', function(car)
     local money = HC:GetMoney(source)
     if money >= car.price then
         HC:RemoveMoney(source, car.price)
-        TriggerClientEvent('hc:vehDealer:spawnCar', _source, car.carModel)
+        TriggerClientEvent('hc:vehDealer:spawnCar', _source, car.model)
     else
         print("not enoguh money")
     end
@@ -29,6 +30,5 @@ end)
 
 RegisterNetEvent('hc:vehDealer:registerCar')
 AddEventHandler('hc:vehDealer:registerCar', function(veh)
-    print(veh)
     HC:AddVehicle(source, veh)
 end)
