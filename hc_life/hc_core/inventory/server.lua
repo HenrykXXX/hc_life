@@ -2,7 +2,7 @@
 
 function HC:HasItemAmount(playerId, itemName, amount, cb)
     local inventory = HC:GetPlayerData(playerId).inventory
-    
+    print("name: " .. itemName .. " amount " .. amount)
     for _, item in ipairs(inventory) do
         if item[1] == itemName and item[2] >= amount then
             cb(true)
@@ -31,9 +31,9 @@ end
 
 
 function HC:AddItem(id, itemName, amount)
-    local src = id
+    local src = tonumber(id)
     
-    local playerStats = HC:GetPlayerData(id)
+    local playerStats = HC:GetPlayerData(src)
     if not playerStats then
         print("hc:core: No player stats found for player ID " .. src)
         return
@@ -97,7 +97,7 @@ end
 RegisterNetEvent('hc:core:inventory:show')
 AddEventHandler('hc:core:inventory:show', function()
     local src = source
-    print(HC:GetPlayerData(src).inventory)
+
     TriggerClientEvent('hc:core:receiveInventoryData', src, {
         inventory = HC:GetPlayerData(src).inventory,
         money = HC:GetPlayerData(src).money,

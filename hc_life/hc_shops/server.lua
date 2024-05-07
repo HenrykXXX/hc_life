@@ -53,6 +53,7 @@ end)
 RegisterNetEvent('hc:shops:showMarket')
 AddEventHandler('hc:shops:showMarket', function()
     local src = source
+
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
         inventory = HC:GetPlayerData(src).inventory,
         money = HC:GetPlayerData(src).money,

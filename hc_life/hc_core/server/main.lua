@@ -6,12 +6,12 @@ HC = {
 -- Function to get player data
 function HC:GetPlayerData(source)
     local identifier = source --GetPlayerIdentifiers(source)[1]
-    return self.PlayerData[identifier]
+    return HC.PlayerData[identifier]
 end
 
 -- Function to get all vehicle data --
 function HC:GetVehicleData()
-    return self.Vehicles
+    return HC.Vehicles
 end
 
 exports('GetHC', function() return HC end)

@@ -34,18 +34,20 @@ end)
 
 RegisterNetEvent('hc:shops:showMarket')
 AddEventHandler('hc:shops:showMarket', function()
-    TriggerServerEvent('hc:core:showMarket')
+    print("showmarekt")
+    TriggerServerEvent('hc:shops:showMarket')
 end)
 
 RegisterNetEvent('hc:shops:updateMarket')
 AddEventHandler('hc:shops:updateMarket', function()
     print("update")
-    TriggerServerEvent('hc:core:showMarket')
+    TriggerServerEvent('hc:shops:showMarket')
 end)
 
 RegisterNetEvent('hc:shops:receiveInventoryData')
 AddEventHandler('hc:shops:receiveInventoryData', function(inventoryData)
     SetNuiFocus(true, true)
+    print("recieved")
     SendNUIMessage({
         type = "show",
         inventory = inventoryData.inventory,
