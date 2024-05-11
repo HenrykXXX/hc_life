@@ -23,10 +23,11 @@ function spawnFruitNearPosition()
 
     local z = spawnPos.z
 
-    --loadModel(fruitHash)
-    
     local fruit = CreateObject(fruitHash, x, y, z, true, true, false)
-    --TriggerClientEvent('hc:ff:disableCollision', -1, fruit)
+    
+    --this does not want to work---
+    --TriggerClientEvent('hc:ff:disableCollision', -1, NetworkGetNetworkIdFromEntity(fruit))
+
     --PlaceObjectOnGroundProperly(fruit)
     return fruit
 end
@@ -40,6 +41,7 @@ CreateThread(function()
     while true do
         Wait(500)  -- Wait one second between spawns
         if #spawnedFruits < maxFruits then
+            print(#spawnedFruits)
             local newFruit = spawnFruitNearPosition()
             table.insert(spawnedFruits, newFruit)
         end
@@ -55,10 +57,11 @@ function checkAndCollectFruit(playerId)
         if #(playerPos - fruitPos) < 3 then  -- If player is close enough to collect the fruit
             -- Add the fruit to the player's inventory
             HC:AddItem(playerId, 'pineapple', 1)
-            print("near fruit")
-            print(playerId)
+            print("near fruit " .. fruit)
             -- Delete the fruit
-            TriggerClientEvent('hc:ff:FruitCollected', playerId, fruit)
+            DeleteEntity(fruit)
+            
+            TriggerClientEvent('hc:ff:FruitCollected', playerId, NetworkGetNetworkIdFromEntity(fruit))
             
             table.remove(spawnedFruits, i)
             break  -- Exit the loop once a fruit is collected

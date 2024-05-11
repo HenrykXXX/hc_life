@@ -47,6 +47,10 @@
     "hc_vehicleDealer": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "hc_ui\\hc_bank": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

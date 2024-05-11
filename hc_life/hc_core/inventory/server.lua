@@ -29,6 +29,18 @@ function HC:GetMoney(playerId, amount)
     return playerData.money
 end
 
+function HC:AddBankMoney(playerId, amount)
+    local playerData = HC:GetPlayerData(playerId)
+
+    playerData.bankMoney = (playerData.bankMoney or 0) + amount
+end
+
+function HC:RemoveBankMoney(playerId, amount)
+    local playerData = HC:GetPlayerData(playerId)
+
+    playerData.bankMoney = (playerData.bankMoney or 0) - amount
+end
+
 
 function HC:AddItem(id, itemName, amount)
     local src = tonumber(id)

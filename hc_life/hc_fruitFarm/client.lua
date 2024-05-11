@@ -41,13 +41,11 @@ end)
 -- Event handler for collecting a fruit
 RegisterNetEvent('hc:ff:FruitCollected')
 AddEventHandler('hc:ff:FruitCollected', function(fruit)
-    local fruitPos = GetEntityCoords(fruit)
+    local fruitEntity = NetworkGetEntityFromNetworkId(fruit)
 
     -- Play collection sound
+    local fruitPos = GetEntityCoords(fruitEntity)
     PlaySoundFromCoord(-1, "PICK_UP", fruitPos.x, fruitPos.y, fruitPos.z, "HUD_FRONTEND_DEFAULT_SOUNDSET", false, 0, false)
-
-    -- Delete the fruit object
-    DeleteObject(fruit)
 end)
 
 
