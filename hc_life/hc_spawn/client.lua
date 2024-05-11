@@ -11,6 +11,7 @@ local spawnPoints = {
 RegisterNUICallback('selectSpawn', function(data, cb)
     local spawnIdx = data.spawnIndex
     if spawnPoints[spawnIdx] then
+        DisplayRadar(true)
         local pos = spawnPoints[spawnIdx]
         SetEntityCoords(PlayerPedId() , pos.x, pos.y, pos.z, false, false, false, false)
         --hc.com.teleportPlayerToGround(pos.x, pos.y, pos.z)
@@ -24,9 +25,10 @@ end)
 local teleportLocation = vector3(-1500.0, -1000.0, 10.0)  -- Change coordinates to your desired location
 
 AddEventHandler('playerSpawned', function()
+    DisplayRadar(false)
+    SetNuiFocus(true, true)
     activateFixedCamera()
     hc.com.teleportPlayerToGround(teleportLocation.x, teleportLocation.y, teleportLocation.z)
-    SetNuiFocus(true, true)
     SendNUIMessage({type = 'show'})
 end)
 
@@ -57,3 +59,4 @@ function deactivateFixedCamera()
     -- Destroy the camera for good measure
     DestroyCam(fixedCamera, false)
 end
+
