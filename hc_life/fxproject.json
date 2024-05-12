@@ -51,6 +51,10 @@
     "hc_ui\\hc_bank": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "[UI]\\hc_tunerShop": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

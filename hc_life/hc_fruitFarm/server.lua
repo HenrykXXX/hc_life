@@ -23,7 +23,7 @@ function spawnFruitNearPosition()
 
     local z = spawnPos.z
 
-    local fruit = CreateObject(fruitHash, x, y, z, true, true, false)
+    local fruit = CreateObjectNoOffset(fruitHash, x, y, z, true, true, false)
     
     --this does not want to work---
     --TriggerClientEvent('hc:ff:disableCollision', -1, NetworkGetNetworkIdFromEntity(fruit))
@@ -41,7 +41,6 @@ CreateThread(function()
     while true do
         Wait(500)  -- Wait one second between spawns
         if #spawnedFruits < maxFruits then
-            print(#spawnedFruits)
             local newFruit = spawnFruitNearPosition()
             table.insert(spawnedFruits, newFruit)
         end

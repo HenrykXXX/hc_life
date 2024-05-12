@@ -1,0 +1,46 @@
+body {
+    background-color: transparent;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: none;
+    background-color: black;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 3px solid white;
+    border-radius: 3px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-item label {
+    margin-bottom: 5px;
+}
+
+.grid-item input {
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+}
+
+.grid-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
