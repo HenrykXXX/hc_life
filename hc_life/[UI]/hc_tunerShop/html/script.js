@@ -1,10 +1,9 @@
-const handlingData = [
+const normalHandlingData = [
+    'fEnginePower',
     'fMass',
     'fInitialDragCoeff',
     'fDownforceModifier',
     'fPercentSubmerged',
-    'vecCentreOfMassOffset',
-    'vecInertiaMultiplier',
     'fDriveBiasFront',
     'nInitialDriveGears',
     'fInitialDriveForce',
@@ -47,12 +46,17 @@ const handlingData = [
     'nMonetaryValue'
 ];
 
+const vectorHandlingData = [
+    'vecCentreOfMassOffset',
+    'vecInertiaMultiplier'
+];
+
 function createHandlingEditor() {
     const container = document.querySelector('.container');
     const grid = document.createElement('div');
     grid.className = 'grid';
 
-    handlingData.forEach(item => {
+    normalHandlingData.forEach(item => {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
 
@@ -62,8 +66,8 @@ function createHandlingEditor() {
 
         const input = document.createElement('input');
         input.type = 'number';
-        input.value = '1.0';
         input.step = '0.01';
+        input.value = '1.0';
         gridItem.appendChild(input);
 
         const button = document.createElement('button');
@@ -77,6 +81,55 @@ function createHandlingEditor() {
                 body: JSON.stringify({
                     handlingType: item,
                     value: parseFloat(input.value)
+                })
+            });
+        });
+        gridItem.appendChild(button);
+
+        grid.appendChild(gridItem);
+    });
+
+    vectorHandlingData.forEach(item => {
+        const gridItem = document.createElement('div');
+        gridItem.className = 'grid-item';
+
+        const label = document.createElement('label');
+        label.textContent = item;
+        gridItem.appendChild(label);
+
+        const inputX = document.createElement('input');
+        inputX.type = 'number';
+        inputX.step = '0.01';
+        inputX.placeholder = 'X';
+        gridItem.appendChild(inputX);
+
+        const inputY = document.createElement('input');
+        inputY.type = 'number';
+        inputY.step = '0.01';
+        inputY.placeholder = 'Y';
+        gridItem.appendChild(inputY);
+
+        const inputZ = document.createElement('input');
+        inputZ.type = 'number';
+        inputZ.step = '0.01';
+        inputZ.placeholder = 'Z';
+        gridItem.appendChild(inputZ);
+
+        const button = document.createElement('button');
+        button.textContent = 'Set';
+        button.addEventListener('click', () => {
+            fetch(`https://${GetParentResourceName()}/setHandlingData`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    handlingType: item,
+                    value: {
+                        x: parseFloat(inputX.value),
+                        y: parseFloat(inputY.value),
+                        z: parseFloat(inputZ.value)
+                    }
                 })
             });
         });

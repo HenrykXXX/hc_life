@@ -5,7 +5,7 @@ Citizen.CreateThread(function()
         {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6204.0, 31.5), npcHeading = 360.0},
         {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0},
-        
+        {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0},
          -- Add more NPCs in the same format
     }
 
