@@ -18,14 +18,3 @@ function HC.Config.Vehicles.GetPrice(model)
 
     return price
 end
-
-RegisterCommand("hc.getPrice", function(_, args)
-    local car = args[1]
-
-    if car then
-        local price = HC.Config.Vehicles.GetPrice(car)
-        print("Price of " .. car .. ": $" .. price)
-    else
-        print("Please provide a vehicle model as an argument.")
-    end
-end)

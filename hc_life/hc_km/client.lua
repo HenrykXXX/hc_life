@@ -7,10 +7,10 @@ local keyBindings = {
         event = 'hc:showWeaponSelector'
     },
     {
-        command = "hc.core.showInventory",
+        command = "hc.inventory.show",
         description = 'Open Inventory',
         defaultKey = 'I',
-        event = 'hc:core:showInventory'
+        event = 'hc:inventory:show'
     },
 }
 

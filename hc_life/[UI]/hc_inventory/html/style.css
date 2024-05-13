@@ -1,0 +1,89 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+    color: white;
+}
+
+#inventory-container {
+    background-color: black;
+    width: 80%;
+    height: 80%;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    justify-content: space-between;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+#other-items-container,
+#player-items-container {
+    height: 60%;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+#other-item-list li,
+#player-item-list li {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#other-item-list li:hover,
+#player-item-list li:hover {
+    background-color: #444;
+}
+
+#other-item-list li.selected,
+#player-item-list li.selected {
+    background-color: #888;
+}
+
+.item-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#weight-info {
+    margin-top: 10px;
+}
+
+button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.inventory-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: blue;
+}
+
+.inventory-title h3 {
+    margin: 0;
+}
+
+.inventory-title h4 {
+    margin: 0;
+}

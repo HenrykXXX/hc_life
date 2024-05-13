@@ -55,14 +55,19 @@ function checkAndCollectFruit(playerId)
         local fruitPos = GetEntityCoords(fruit)
         if #(playerPos - fruitPos) < 3 then  -- If player is close enough to collect the fruit
             -- Add the fruit to the player's inventory
-            HC:AddItem(playerId, 'pineapple', 1)
-            print("near fruit " .. fruit)
-            -- Delete the fruit
-            DeleteEntity(fruit)
-            
-            TriggerClientEvent('hc:ff:FruitCollected', playerId, NetworkGetNetworkIdFromEntity(fruit))
-            
-            table.remove(spawnedFruits, i)
+            local added = HC.Inventory.AddItem(playerId, 'pineapple', 1)
+
+            if added then
+                -- Delete the fruit
+                DeleteEntity(fruit)
+                
+                TriggerClientEvent('hc:ff:FruitCollected', playerId, NetworkGetNetworkIdFromEntity(fruit))
+                
+                table.remove(spawnedFruits, i)
+            else
+                print("inventory full")
+                --TriggerClientEvent('hc:ff:FruitCollected', playerId, NetworkGetNetworkIdFromEntity(fruit))
+            end
             break  -- Exit the loop once a fruit is collected
         end
     end

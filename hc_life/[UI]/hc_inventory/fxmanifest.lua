@@ -5,12 +5,14 @@ author 'HenrykXXX'
 version '1.0.0'
 
 client_scripts {
-    'client.lua'
+    'client/main.lua'
 }
 
 server_scripts {
-    'server.lua'
+    'server/main.lua'
 }
+
+shared_script 'shared.lua'
 
 ui_page 'html/index.html'
 

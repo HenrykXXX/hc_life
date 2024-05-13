@@ -8,7 +8,6 @@ RegisterNUICallback('hideBank', function(data, cb)
     SetNuiFocus(false, false)
 end)
 
-RegisterNetEvent('hc:bank:show')
 AddEventHandler('hc:bank:show', function()
     requestBankData()
 end)

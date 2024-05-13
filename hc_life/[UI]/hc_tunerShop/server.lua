@@ -6,7 +6,7 @@ AddEventHandler('hc:tunerShop:buy', function(amount, data)
 
     local playerData = HC:GetPlayerData(src)
     if playerData.money >= amount then
-        HC:RemoveMoney(src, amount)
+        HC.Bank.RemoveMoney(src, amount)
 
         TriggerClientEvent('hc:tunerShop:receiveUpgrade', src, true, data)
     else

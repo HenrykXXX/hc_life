@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="inventory-container">
+        <div class="column">
+            <h2>Ground Items</h2>
+            <div id="other-items-container">
+                <div class="inventory-title">
+                    <h3>Item List</h3>
+                </div>
+                <ul id="other-item-list"></ul>
+            </div>
+        </div>
+        <div class="column">
+            <div id="player-info">
+                <p id="money"></p>
+                <p id="bank-money"></p>
+                <!-- Add other player data labels here -->
+            </div>
+        </div>
+        <div class="column">
+            <h2>Player Inventory</h2>
+            <div id="player-items-container">
+                <div class="inventory-title">
+                    <h3>Item List</h3>
+                    <h4 id="player-weight">0/24kg</h4>
+                </div>
+                <ul id="player-item-list"></ul>
+            </div>
+            <div id="weight-info">
+                <p id="max-weight"></p>
+                <p id="current-weight"></p>
+            </div>
+            <button id="drop-item">Drop Item</button>
+            <button id="use-item">Use Item</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

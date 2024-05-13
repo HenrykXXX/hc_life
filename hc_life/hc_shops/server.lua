@@ -10,20 +10,20 @@ local Config = {
 
 -- In the market resource
 function processItemSale(src, itemName, amount, price)
-    HC:HasItemAmount(src, itemName, amount, function(hasEnough)
+    HC.Inventory.HasItemAmount(src, itemName, amount, function(hasEnough)
         if not hasEnough then
             print("hc:core: Not enough " .. itemName .. " to sell.")
             return
         end
 
         -- Proceed with the transaction if the item check is successful
-        HC:RemoveItem(src, itemName, amount)
+        HC.Inventory.RemoveItem(src, itemName, amount)
         local totalEarnings = price * amount
         --TriggerEvent("hc:core:inventory:addMoney", src, totalEarnings)
-        HC:AddMoney(src, totalEarnings)
+        HC.Bank.AddMoney(src, totalEarnings)
 
         TriggerClientEvent("hc:shops:updateMarket", src)
-        print("hc:core: Player ID " .. src .. " sold " .. amount .. " " .. itemName .. " for " .. totalEarnings)
+        print("Player ID " .. src .. " sold " .. amount .. " " .. itemName .. " for " .. totalEarnings)
     end)
 end
 
@@ -55,7 +55,7 @@ AddEventHandler('hc:shops:showMarket', function()
     local src = source
 
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
-        inventory = HC:GetPlayerData(src).inventory,
+        inventory = HC:GetPlayerData(src).inventory.items,
         money = HC:GetPlayerData(src).money,
         bankMoney = HC:GetPlayerData(src).bankMoney
     })

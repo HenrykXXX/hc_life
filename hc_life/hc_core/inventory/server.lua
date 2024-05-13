@@ -1,9 +1,9 @@
---local HC = exports.hc_core.GetHC()
+HC.Inventory = {}
 
-function HC:HasItemAmount(playerId, itemName, amount, cb)
+function HC.Inventory.HasItemAmount(playerId, itemName, amount, cb)
     local inventory = HC:GetPlayerData(playerId).inventory
     print("name: " .. itemName .. " amount " .. amount)
-    for _, item in ipairs(inventory) do
+    for _, item in ipairs(inventory.items) do
         if item[1] == itemName and item[2] >= amount then
             cb(true)
         end
@@ -11,38 +11,7 @@ function HC:HasItemAmount(playerId, itemName, amount, cb)
     cb(false)
 end
 
-function HC:AddMoney(playerId, amount)
-    local playerData = HC:GetPlayerData(playerId)
-
-    playerData.money = (playerData.money or 0) + amount
-end
-
-function HC:RemoveMoney(playerId, amount)
-    local playerData = HC:GetPlayerData(playerId)
-
-    playerData.money = (playerData.money or 0) - amount
-end
-
-function HC:GetMoney(playerId, amount)
-    local playerData = HC:GetPlayerData(playerId)
-    
-    return playerData.money
-end
-
-function HC:AddBankMoney(playerId, amount)
-    local playerData = HC:GetPlayerData(playerId)
-
-    playerData.bankMoney = (playerData.bankMoney or 0) + amount
-end
-
-function HC:RemoveBankMoney(playerId, amount)
-    local playerData = HC:GetPlayerData(playerId)
-
-    playerData.bankMoney = (playerData.bankMoney or 0) - amount
-end
-
-
-function HC:AddItem(id, itemName, amount)
+function HC.Inventory.AddItem(id, itemName, amount)
     local src = tonumber(id)
     
     local playerStats = HC:GetPlayerData(src)
@@ -52,10 +21,21 @@ function HC:AddItem(id, itemName, amount)
     end
 
     local inventory = playerStats.inventory
-    local itemFound = false
+    local items = playerStats.inventory.items
+    local maxWeight = playerStats.inventory.maxWeight
 
+    local itemWeight = HC.Config.Items.GetWeight(itemName)
+    local totalWeight = HC.Inventory.GetWeight(src)
+
+    if (totalWeight + itemWeight) > maxWeight then
+        print("Not enough space in inventory for player ID: " .. src)
+        return false
+    end
+
+
+    local itemFound = false
     -- Check if the item already exists in the inventory
-    for i, item in ipairs(inventory) do
+    for i, item in ipairs(items) do
         if item[1] == itemName then
             item[2] = item[2] + amount  -- Increase the amount of the existing item
             itemFound = true
@@ -65,14 +45,18 @@ function HC:AddItem(id, itemName, amount)
 
     -- If the item was not found, add it as a new entry
     if not itemFound then
-        table.insert(inventory, {itemName, amount})
+        table.insert(items, {itemName, amount})
     end
 
-    TriggerClientEvent('hc:core:inventoryUpdated', src, inventory) -- Optional: Notify the client about the updated inventory
-    print("hc:core: Item " .. itemName .. " added to player ID " .. src .. " inventory.")
+    --update current weight--
+    inventory.currentWeight = HC.Inventory.GetWeight(src)
+
+    --playerStats.inventory = inventory
+    print("Item " .. itemName .. " added to player ID " .. src .. " inventory.")
+    return true
 end
 
-function HC:RemoveItem(playerId, itemName, amount)
+function HC.Inventory.RemoveItem(playerId, itemName, amount)
     local src = playerId
 
     local playerStats = HC:GetPlayerData(src)
@@ -83,21 +67,24 @@ function HC:RemoveItem(playerId, itemName, amount)
     end
 
     local inventory = playerStats.inventory
+    local items = playerStats.inventory.items
     local itemFound = false
 
     -- Check if the item exists in the inventory
-    for i, item in ipairs(inventory) do
+    for i, item in ipairs(items) do
         if item[1] == itemName then
             item[2] = item[2] - amount  -- Decrease the amount of the existing item
 
             -- If the item count goes to zero or below, remove it from the inventory
             if item[2] <= 0 then
-                table.remove(inventory, i)
+                table.remove(items, i)
             end
             itemFound = true
             break
         end
     end
+
+    inventory.currentWeight = HC.Inventory.GetWeight(src)
 
     if not itemFound then
         print("hc:core: Item " .. itemName .. " not found in player ID " .. src .. " inventory.")
@@ -106,16 +93,34 @@ function HC:RemoveItem(playerId, itemName, amount)
     end
 end
 
-RegisterNetEvent('hc:core:inventory:show')
-AddEventHandler('hc:core:inventory:show', function()
-    local src = source
+function HC.Inventory.GetWeight(id)
+    local src = tonumber(id)
+    
+    
+    local playerStats = HC:GetPlayerData(src)
+    if not playerStats then
+        print("hc:core: No player stats found for player ID " .. src)
+        return
+    end
 
-    TriggerClientEvent('hc:core:receiveInventoryData', src, {
-        inventory = HC:GetPlayerData(src).inventory,
-        money = HC:GetPlayerData(src).money,
-        bankMoney = HC:GetPlayerData(src).bankMoney
-    })
-end)
+    local inventory = playerStats.inventory
+    local items = playerStats.inventory.items
+    local maxWeight = playerStats.inventory.maxWeight
+
+    local totalWeight = 0
+
+    -- Check if the item already exists in the inventory
+    for i, item in ipairs(items) do
+        local itemName = item[1]
+        local itemCount = item[2]
+
+        local itemWeight = HC.Config.Items.GetWeight(itemName)
+
+        totalWeight = totalWeight + (itemWeight*itemCount)
+    end
+
+    return totalWeight
+end
 
 
 -- Register the command
@@ -123,5 +128,5 @@ RegisterCommand("hc.core.addMoney", function(source, args, rawCommand)
     local playerId = tonumber(args[1])
     local amount = tonumber(args[2])
 
-    HC:AddMoney(playerId, amount)
-end)
+    HC.Inventory.AddBankMoney(playerId, amount)
+end, true)

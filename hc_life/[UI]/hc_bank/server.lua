@@ -16,8 +16,8 @@ AddEventHandler('hc:bank:withdraw', function(amount)
     local src = source
     local data = HC:GetPlayerData(src)
     if data.bankMoney >= amount then
-        HC:RemoveBankMoney(src, amount)
-        HC:AddMoney(src, amount)
+        HC.Bank.RemoveBankMoney(src, amount)
+        HC.Bank.AddMoney(src, amount)
         TriggerClientEvent('hc:bank:receiveBankData', src, {
             money = HC:GetPlayerData(src).money,
             bankMoney = HC:GetPlayerData(src).bankMoney
@@ -32,8 +32,8 @@ AddEventHandler('hc:bank:deposit', function(amount)
     local src = source
     local data = HC:GetPlayerData(src)
     if data.money >= amount then
-        HC:RemoveMoney(src, amount)
-        HC:AddBankMoney(src, amount)
+        HC.Bank.RemoveMoney(src, amount)
+        HC.Bank.AddBankMoney(src, amount)
         TriggerClientEvent('hc:bank:receiveBankData', src, {
             money = HC:GetPlayerData(src).money,
             bankMoney = HC:GetPlayerData(src).bankMoney

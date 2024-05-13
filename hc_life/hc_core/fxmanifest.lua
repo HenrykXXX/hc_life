@@ -27,21 +27,19 @@ server_scripts {
     --configuration--
     "config/vehicles.lua",
 
+    --items--
+    'config/items.lua',
+
     --inventory--
     'inventory/server.lua',
 
     --vehicles--
     'vehicles/server.lua',
 
+    --bank--
+    'bank/server.lua',
+
     --time--
     'time/server.lua'
 }
 
-
-ui_page 'inventory/html/index.html'
-
-files {
-    'inventory/html/index.html',
-    'inventory/html/style.css',
-    'inventory/html/script.js'
-}

@@ -1,4 +1,4 @@
-function HC:AddVehicle(id, vehicleId)
+function HC.Vehicles.AddVehicle(id, vehicleId)
     local playerData = HC:GetPlayerData(id)
     if playerData then
         print("veh id " .. vehicleId)
@@ -18,7 +18,7 @@ function HC:AddVehicle(id, vehicleId)
     end
 end
 
-function HC:AddTrunkItem(id, vehicleId, itemName, amount)
+function HC.Vehicles.AddTrunkItem(id, vehicleId, itemName, amount)
     local vehicle = HC:GetVehicleData(vehicleId)
     if vehicle then
         local trunk = vehicle[2]
@@ -44,7 +44,7 @@ function HC:AddTrunkItem(id, vehicleId, itemName, amount)
     end
 end
 
-function HC:RemoveTrunkItem(id, vehicleId, itemName, amount)
+function HC.Vehicles.RemoveTrunkItem(id, vehicleId, itemName, amount)
     local vehicle = HC:GetVehicleData(vehicleId)
     if vehicle then
         local trunk = vehicle[2]
@@ -75,7 +75,7 @@ function HC:RemoveTrunkItem(id, vehicleId, itemName, amount)
 end
 
 -- Add this function to your server-side code
-function HC:GetPlayerVehicles(id)
+function HC.Vehicles.GetPlayerVehicles(id)
     local playerData = HC:GetPlayerData(id)
     if playerData then
         local vehicles = {}
@@ -99,7 +99,7 @@ end
 RegisterCommand("hc.core.getPlayerVehicles", function(source, args, rawCommand)
     local playerId = tonumber(args[1])
     if playerId then
-        local vehicles = HC:GetPlayerVehicles(playerId)
+        local vehicles = HC.Vehicles.GetPlayerVehicles(playerId)
         if #vehicles > 0 then
             print("Player ID " .. playerId .. " owns the following vehicles:")
             for _, vehicle in ipairs(vehicles) do
