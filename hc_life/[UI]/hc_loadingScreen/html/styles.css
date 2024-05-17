@@ -1,18 +1,27 @@
-/* Resetting default margin and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* Basic styles for the body */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  overflow: hidden; /* Add this line to hide the scrollbars */
 }
 
 
 #myCanvas {
   background-color: black;
+}
+
+/* Hide scrollbars for WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbars for IE and Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbars for Firefox */
+html {
+  scrollbar-width: none;
 }
