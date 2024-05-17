@@ -128,5 +128,5 @@ RegisterCommand("hc.core.addMoney", function(source, args, rawCommand)
     local playerId = tonumber(args[1])
     local amount = tonumber(args[2])
 
-    HC.Inventory.AddBankMoney(playerId, amount)
+    HC.Bank.AddBankMoney(playerId, amount)
 end, true)

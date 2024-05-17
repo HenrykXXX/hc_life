@@ -63,6 +63,10 @@
     "[UI]\\hc_inventory": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "[UI]\\hc_loadingScreen": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

@@ -2,7 +2,7 @@ local HC = exports.hc_core.GetHC()
 
 local Config = {
     ShopItems = {
-        {itemname = "pineapple", price = 50},
+        {itemname = "pineapple", price = 200000},
         {itemname = "applecrate", price = 120}
     }
 }
