@@ -61,7 +61,7 @@
       "restartOnChange": true
     },
     "[UI]\\hc_loadingScreen": {
-      "enabled": false,
+      "enabled": true,
       "restartOnChange": true
     },
     "[UI]\\hc_shops": {

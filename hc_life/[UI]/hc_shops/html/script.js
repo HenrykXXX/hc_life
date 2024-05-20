@@ -37,6 +37,32 @@ document.getElementById('sell-item-button').addEventListener('click', function()
     }
 });
 
+document.getElementById('buy-item-button').addEventListener('click', function() {
+    const selectedItem = document.querySelector('#other-item-list li.selected');
+    if (selectedItem) {
+        const itemName = selectedItem.textContent.split(' - ')[0];
+        const amount = parseInt(document.getElementById('buy-amount').value);
+        if (!isNaN(amount) && amount > 0) {
+            fetch(`https://${GetParentResourceName()}/buyItem`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item: itemName, quantity: amount })
+            }).then(response => {
+                // Handle the response from the server if needed
+                console.log(response);
+            }).catch(error => {
+                console.error('Error buying item:', error);
+            });
+        } else {
+            console.log('Invalid buy amount');
+        }
+    } else {
+        console.log('No item selected');
+    }
+});
+
 function updateInventory(data) {
     document.getElementById('money').textContent = "Money: $" + data.money;
     document.getElementById('bank-money').textContent = "Bank Money: $" + data.bankMoney;
@@ -86,8 +112,19 @@ document.getElementById('player-item-list').addEventListener('click', function(e
     }
 });
 
+document.getElementById('other-item-list').addEventListener('click', function(event) {
+    if (event.target && event.target.tagName === 'LI') {
+        const selectedItem = document.querySelector('#other-item-list li.selected');
+        if (selectedItem) {
+            selectedItem.classList.remove('selected');
+        }
+        event.target.classList.add('selected');
+    }
+});
+
+
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Backspace' || event.keyCode === 8) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
         document.getElementById('container').style.display = 'none';
         // Notify the game to handle the close event
         fetch(`https://${GetParentResourceName()}/hideMarket`, {

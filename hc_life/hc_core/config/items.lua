@@ -10,7 +10,13 @@ HC.Config.Items = {
         model = -845035989,
         basePrice = 5000,
         weight = 1,
-    }
+    },
+    {
+        name = "applecrate",
+        model = -845035989,
+        basePrice = 120,
+        weight = 5,
+    },
 }
 
 local function findItem(name)

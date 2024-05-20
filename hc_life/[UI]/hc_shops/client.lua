@@ -4,6 +4,11 @@ RegisterNUICallback('sellItem', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('buyItem', function(data, cb)
+    TriggerServerEvent('hc:shops:market:buyItem', data.item, data.quantity)
+    cb('ok')
+end)
+
 RegisterNetEvent('hc:shops:showMarket')
 AddEventHandler('hc:shops:showMarket', function()
     TriggerServerEvent('hc:shops:showMarket')
