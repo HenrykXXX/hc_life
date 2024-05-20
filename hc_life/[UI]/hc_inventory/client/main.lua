@@ -9,7 +9,6 @@ RegisterNUICallback('hideInventory', function(data, cb)
 end)
 
 AddEventHandler('hc:inventory:show', function()
-    print("Show  Inventory")
     requestInventoryData()
 end)
 

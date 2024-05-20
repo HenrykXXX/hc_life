@@ -2,8 +2,8 @@ local HC = exports.hc_core.GetHC()
 
 local Config = {
     ShopItems = {
-        {itemname = "pineapple", price = 200000},
-        {itemname = "applecrate", price = 120}
+        {name = "pineapple", price = 200000},
+        {name = "applecrate", price = 120}
     }
 }
 
@@ -34,7 +34,7 @@ AddEventHandler('hc:shops:market:sellItem', function(itemName, amount, cb)
     -- Check if the item is sellable at the market
     local price = nil
     for _, item in ipairs(Config.ShopItems) do
-        if item.itemname == itemName then
+        if item.name == itemName then
             price = item.price
             break
         end
@@ -57,6 +57,7 @@ AddEventHandler('hc:shops:showMarket', function()
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
         inventory = HC:GetPlayerData(src).inventory.items,
         money = HC:GetPlayerData(src).money,
-        bankMoney = HC:GetPlayerData(src).bankMoney
+        bankMoney = HC:GetPlayerData(src).bankMoney,
+        shopItems = Config.ShopItems
     })
 end)

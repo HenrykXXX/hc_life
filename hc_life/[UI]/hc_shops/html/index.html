@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
+    <title>Market</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="container">
         <div id="title">
-            <h1>Inventory</h1>
+            <h1>Market</h1>
         </div>
         <div id="inventory-container">
             <div class="column">
@@ -18,6 +18,10 @@
                         <h3>Item List</h3>
                     </div>
                     <ul id="other-item-list"></ul>
+                </div>
+                <div id="buy-item-container">
+                    <input type="number" id="buy-amount" placeholder="Amount" min="1">
+                    <button id="buy-item-button">Buy Item</button>
                 </div>
             </div>
             <div class="column">
@@ -36,12 +40,10 @@
                     </div>
                     <ul id="player-item-list"></ul>
                 </div>
-                <div id="weight-info">
-                    <p id="max-weight"></p>
-                    <p id="current-weight"></p>
+                <div id="sell-item-container">
+                    <input type="number" id="sell-amount" placeholder="Amount" min="1">
+                    <button id="sell-item-button">Sell Item</button>
                 </div>
-                <button id="drop-item">Drop Item</button>
-                <button id="use-item">Use Item</button>
             </div>
         </div>
     </div>

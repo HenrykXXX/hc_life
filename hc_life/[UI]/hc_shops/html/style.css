@@ -48,10 +48,6 @@ body, html {
     border-radius: 3px;
 }
 
-#other-items-container {
-    display: none;
-}
-
 #other-item-list li,
 #player-item-list li {
     padding: 5px;
@@ -87,6 +83,23 @@ button {
     padding: 5px 10px;
     margin-top: 10px;
     cursor: pointer;
+}
+
+#sell-item-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#sell-amount {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#sell-item-button {
+    flex: 0 0 auto;
+    padding: 5px 10px;
 }
 
 .inventory-title {
