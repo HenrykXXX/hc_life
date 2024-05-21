@@ -18,9 +18,7 @@ AddEventHandler('hc:inventory:receive', function(inventoryData)
 
     SendNUIMessage({
         type = "show",
-        inventory = inventoryData.inventory.items,
-        maxWeight = inventoryData.inventory.maxWeight,
-        currentWeight = inventoryData.inventory.currentWeight,
+        inventory = inventoryData.inventory,
         money = inventoryData.money,
         bankMoney = inventoryData.bankMoney
     })

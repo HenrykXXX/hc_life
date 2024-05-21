@@ -18,3 +18,17 @@ function HC.Config.Vehicles.GetPrice(model)
 
     return price
 end
+
+function HC.Config.Vehicles.GetTrunkCapacity(model)
+    local capacity = 0
+
+    for _, veh in ipairs(HC.Config.Vehicles) do
+        if veh.model == model then
+            capacity = veh.trunkCapacity
+            break
+        end
+    end
+
+    return capacity
+end
+

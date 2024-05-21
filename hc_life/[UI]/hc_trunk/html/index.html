@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Trunk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="title">
+            <h1>Trunk</h1>
+        </div>
+        <div id="inventory-container">
+            <div class="column">
+                <div id="trunk-items-container">
+                    <div class="inventory-title">
+                        <h3>Trunk</h3>
+                        <h4 id="trunk-weight">0/250kg</h4>
+                    </div>
+                    <ul id="trunk-item-list"></ul>
+                </div>
+                <div id="trunk-item-container">
+                    <input type="number" id="trunk-amount" placeholder="Amount" min="1">
+                    <button id="trunk-item-button" >Get</button>
+                </div>
+            </div>
+
+            <div class="column">
+                <div id="player-items-container">
+                    <div class="inventory-title">
+                        <h3 id="player-title">Player</h3>
+                        <h4 id="player-weight">0/24kg</h4>
+                    </div>
+                    <ul id="player-item-list"></ul>
+                </div>
+                <div id="player-item-container">
+                    <input type="number" id="player-amount" placeholder="Amount" min="1">
+                    <button id="player-item-button">Store</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

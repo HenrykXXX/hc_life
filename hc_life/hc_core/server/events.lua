@@ -39,6 +39,8 @@ AddEventHandler('playerJoining', function()
         vehicles = {}
     }
 
+    HC.Inventory.AddItem(src, 'pineapple', 1)
+
     print("hc:core: Player stats initialized for player ID " .. src)
 end)
 

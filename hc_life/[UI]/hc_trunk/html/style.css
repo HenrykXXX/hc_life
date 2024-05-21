@@ -1,0 +1,122 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+    color: white;
+}
+
+#container {
+    background-color: black;
+    width: 80%;
+    height: 80%;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+#container #title {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inventory-container {
+    display: flex;
+    flex: 1;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+#trunk-items-container,
+#player-items-container {
+    height: 60%;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+#trunk-item-list li,
+#player-item-list li {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#trunk-item-list li:hover,
+#player-item-list li:hover {
+    background-color: #444;
+}
+
+#trunk-item-list li.selected,
+#player-item-list li.selected {
+    background-color: #888;
+}
+
+.item-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#weight-info {
+    margin-top: 10px;
+}
+
+button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#player-item-container,
+#trunk-item-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#player-amount,
+#trunk-amount {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#player-item-button,
+#trunk-item-button {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+}
+
+.inventory-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: blue;
+}
+
+.inventory-title h3 {
+    margin: 0;
+}
+
+.inventory-title h4 {
+    margin: 0;
+}

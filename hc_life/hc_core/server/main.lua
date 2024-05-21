@@ -11,8 +11,8 @@ function HC:GetPlayerData(source)
 end
 
 -- Function to get all vehicle data --
-function HC:GetVehicleData()
-    return HC.Vehicles
+function HC:GetVehicleData(vehicleId)
+    return HC.Vehicles[vehicleId]
 end
 
 exports('GetHC', function() return HC end)

@@ -67,6 +67,10 @@
     "[UI]\\hc_shops": {
       "enabled": true,
       "restartOnChange": true
+    },
+    "[UI]\\hc_trunk": {
+      "enabled": true,
+      "restartOnChange": true
     }
   },
   "serverUpdateChannel": "recommended",

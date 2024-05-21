@@ -4,10 +4,6 @@ window.addEventListener('message', function(event) {
     if (type === "show") {
         updateInventory(event.data);
         document.getElementById('container').style.display = 'flex';
-    } else if (type == "show-market") {
-        updateInventory(event.data);
-        updateMarket(event.data);
-        document.getElementById('container').style.display = 'flex';
     }
 });
 
@@ -18,7 +14,7 @@ function updateInventory(data) {
     const playerItemList = document.getElementById('player-item-list');
     playerItemList.innerHTML = ''; // Clear existing player items
 
-    data.inventory.forEach(item => {
+    data.inventory.items.forEach(item => {
         const li = document.createElement('li');
         const itemImage = document.createElement('img');
         //itemImage.src = `images/${item[0]}.png`; // Assuming item images are stored in an "images" folder
@@ -29,7 +25,7 @@ function updateInventory(data) {
     });
 
     // Update max weight and current weight labels
-    document.getElementById('player-weight').textContent = `${data.currentWeight}/${data.maxWeight}kg`;
+    document.getElementById('player-weight').textContent = `${data.inventory.currentWeight}/${data.inventory.maxWeight}kg`;
     document.getElementById('player-title').textContent = "Inventory";
 }
 
@@ -62,8 +58,8 @@ document.getElementById('player-item-list').addEventListener('click', function(e
     }
 });
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Backspace' || event.keyCode === 8) {
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
         document.getElementById('container').style.display = 'none';
         // Notify the game to handle the close event
         fetch(`https://${GetParentResourceName()}/hideInventory`, {

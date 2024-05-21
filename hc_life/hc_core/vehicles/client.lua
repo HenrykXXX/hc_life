@@ -21,6 +21,7 @@ Citizen.CreateThread(function()
                             SetVehicleDoorShut(vehicle, vehicleDoor, false)
                         else
                             SetVehicleDoorOpen(vehicle, vehicleDoor, false, false)
+                            TriggerEvent('hc:trunk:show', vehicle)
                         end
                     end
                 end
