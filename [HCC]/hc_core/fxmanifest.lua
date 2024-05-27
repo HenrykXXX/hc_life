@@ -5,6 +5,8 @@ author 'HenrykXXX'
 version '1.0.0'
 
 client_scripts {
+    '@mysql-async/lib/MySQL.lua',
+    
     'client/main.lua',
 
     --inventory--

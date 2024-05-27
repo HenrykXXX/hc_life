@@ -4,18 +4,17 @@ game 'gta5'
 author 'HenrykXXX'
 version '1.0.0'
 
-client_scripts {
-    'client.lua'
-}
-
-server_scripts {
-    'server.lua'
-}
-
-ui_page 'html/index.html'
+client_script 'client.lua'
+server_script 'server.lua'
 
 files {
     'html/index.html',
     'html/style.css',
     'html/script.js'
+}
+
+ui_page 'html/index.html'
+
+dependencies {
+    'hc_core'
 }

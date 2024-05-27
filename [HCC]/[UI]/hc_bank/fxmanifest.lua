@@ -1,15 +1,18 @@
 fx_version 'bodacious'
 game 'gta5'
 
-author 'You'
+author 'HenrykXXX'
 version '1.0.0'
 
 client_scripts {
-    'client.lua',
+    'client.lua'
 }
+
 server_scripts {
     'server.lua'
 }
+
+ui_page 'html/index.html'
 
 files {
     'html/index.html',
@@ -17,9 +20,6 @@ files {
     'html/script.js'
 }
 
-ui_page 'html/index.html'
-
 dependencies {
     'hc_core'
 }
-

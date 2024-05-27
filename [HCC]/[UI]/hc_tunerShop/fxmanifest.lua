@@ -19,3 +19,7 @@ files {
     'html/style.css',
     'html/script.js'
 }
+
+dependencies {
+    'hc_core'
+}
