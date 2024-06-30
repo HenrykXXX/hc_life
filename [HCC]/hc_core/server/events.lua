@@ -68,6 +68,8 @@ AddEventHandler('playerJoining', function()
             end)
         end
 
+        HC.PlayerData[src].key = license
+
         --HC.Inventory.AddItem(src, 'pineapple', 1)
         print("hc:core: Player stats initialized for player ID " .. src)
     end)
@@ -79,7 +81,7 @@ AddEventHandler('playerDropped', function(reason)
     if HC.PlayerData[src] then
         -- Save player data to the database before removing from memory
         exports['mysql-async']:mysql_execute('UPDATE users SET money = @money, bank = @bank, inventory = @inventory, vehicles = @vehicles WHERE identifier = @identifier', {
-            ['@identifier'] = string.sub(GetPlayerIdentifier(src, 0), string.len("license:") + 1),
+            ['@identifier'] = HC.PlayerData[src].key, --string.sub(GetPlayerIdentifier(src, 0), string.len("license:") + 1),
             ['@money'] = HC.PlayerData[src].money,
             ['@bank'] = HC.PlayerData[src].bankMoney,
             ['@inventory'] = json.encode(HC.PlayerData[src].inventory),

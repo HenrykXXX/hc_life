@@ -1,8 +1,9 @@
 HC.Config.Vehicles = {
     {
-        model = "panto",
+        --panto
+        model = -431692672,
         basePrice = 5000,
-        trunkCapacity = 250,
+        trunkCapacity = 48,
     }
 }
 

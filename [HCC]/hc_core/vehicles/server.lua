@@ -1,3 +1,5 @@
+HC.Vehicles.last = nil
+
 function HC.Vehicles.AddVehicle(id, vehicleId)
     local playerData = HC:GetPlayerData(id)
     if playerData then
@@ -11,16 +13,44 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
        -- local vehName = GetDisplayNameFromVehicleModel(vehModel)
     
        local vehCapacity = HC.Config.Vehicles.GetTrunkCapacity(vehModel)
+       print("veh capacity: " .. vehCapacity)
        HC.Vehicles[vehicleId] = {
             model = vehModel,
             trunk = {
                 items = {},
                 currentWeight = 0,
-                maxWeight = 250
-            }
+                maxWeight = vehCapacity
+            },
+            ownerKey = playerData.key,
+            spawned = true
         }
 
+        local vehicleData = HC.Vehicles[vehicleId]
+        HC.Vehicles.last = vehicleId
+        exports['mysql-async']:mysql_execute('INSERT INTO vehicles (model, trunk, owner, spawned) VALUES (@model, @trunk, @owner, @spawned)', {
+            ['@model'] = vehicleData.model,
+            ['@trunk'] = json.encode(vehicleData.trunk),
+            ['@owner'] = vehicleData.ownerKey,
+            ['@spawned'] = vehicleData.spawned
+        }, function(rowsChanged)
+            exports['mysql-async']:mysql_fetch_all('SELECT LAST_INSERT_ID() AS id', {}, function(result)
+                local vehicleId = result[1].id
+                --local HC = exports.hc_core.GetHC()
+                if HC.Vehicles.last then
+                    local last = HC.Vehicles.last
+                    print("last: " .. last)
+                    HC.Vehicles[last].key = vehicleId
+                    HC.Vehicles.last = nil
+                end
+            end)
+        end)
+
+        while HC.Vehicles.last do
+            Wait(1)
+        end
+        
         HC.Vehicles.AddTrunkItem(id, vehicleId, 'pineapple', 1)
+        print("key: ", HC.Vehicles[vehicleId].key)
         print("hc:core: Vehicle " .. vehModel .. " added to player ID " .. id .. " vehicles.")
     else
         print("hc:core: No player data found for player ID " .. id)
@@ -137,7 +167,6 @@ function HC.Vehicles.GetTrunkWeight(vehicleId)
     end
 end
 
--- Add this function to your server-side code
 function HC.Vehicles.GetPlayerVehicles(id)
     local playerData = HC:GetPlayerData(id)
     if playerData then
