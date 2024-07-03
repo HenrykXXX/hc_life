@@ -6,6 +6,7 @@ Citizen.CreateThread(function()
         {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0},
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0},
+        {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0},
 
         --airport---
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0},

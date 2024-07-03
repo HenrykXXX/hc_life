@@ -1,3 +1,22 @@
+local function resetSpawnedField()
+    exports['mysql-async']:mysql_execute('UPDATE vehicles SET spawned = 0 WHERE spawned = 1', {}, function(rowsChanged)
+        if rowsChanged > 0 then
+            print("hc:core: Reset 'spawned' field for " .. rowsChanged .. " vehicles.")
+        else
+            print("hc:core: No vehicles needed 'spawned' field reset.")
+        end
+    end)
+end
+
+-- Event handler for when the resource starts
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+        print("hc:core: Resource " .. resourceName .. " started. Resetting 'spawned' field in database.")
+        resetSpawnedField()
+    end
+end)
+
+
 AddEventHandler('playerJoining', function()
     local src = source
     local steamid = false

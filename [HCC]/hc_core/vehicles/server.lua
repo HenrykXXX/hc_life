@@ -3,17 +3,27 @@ HC.Vehicles.last = nil
 function HC.Vehicles.AddVehicle(id, vehicleId)
     local playerData = HC:GetPlayerData(id)
     if playerData then
-        print("veh id " .. vehicleId)
         table.insert(playerData.vehicles, vehicleId)
+        
+        while HC.Vehicles.last do
+            Wait(10)
+            print("Vehicles: last is still processing...")
+        end 
+
+        while 0 == NetworkGetEntityFromNetworkId(vehicleId) do
+            Wait(1)
+            print("Vehicles: Waiting for entity")
+        end
+
         local vehEntity = NetworkGetEntityFromNetworkId(vehicleId)
-        print(vehEntity)
+        print("Vehicles: Entity - " .. vehEntity)
         local vehModel = GetEntityModel(vehEntity)
         
-        print(vehModel)
+        --print(vehModel)
        -- local vehName = GetDisplayNameFromVehicleModel(vehModel)
     
        local vehCapacity = HC.Config.Vehicles.GetTrunkCapacity(vehModel)
-       print("veh capacity: " .. vehCapacity)
+       --print("veh capacity: " .. vehCapacity)
        HC.Vehicles[vehicleId] = {
             model = vehModel,
             trunk = {
@@ -33,13 +43,14 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
             ['@owner'] = vehicleData.ownerKey,
             ['@spawned'] = vehicleData.spawned
         }, function(rowsChanged)
-            exports['mysql-async']:mysql_fetch_all('SELECT LAST_INSERT_ID() AS id', {}, function(result)
-                local vehicleId = result[1].id
-                --local HC = exports.hc_core.GetHC()
+            exports['mysql-async']:mysql_fetch_all('SELECT MAX(id) AS id FROM vehicles', {}, function(result)
+                local vid = result[1].id
+                print("Vehicles: DBID - " .. vid)
+
                 if HC.Vehicles.last then
                     local last = HC.Vehicles.last
-                    print("last: " .. last)
-                    HC.Vehicles[last].key = vehicleId
+                    --print("last: " .. last)
+                    HC.Vehicles[last].key = vid
                     HC.Vehicles.last = nil
                 end
             end)
@@ -55,6 +66,74 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
     else
         print("hc:core: No player data found for player ID " .. id)
     end
+end
+
+function HC.Vehicles.Register(id, vehicleId, data)
+    local playerData = HC:GetPlayerData(id)
+    
+    if playerData then
+        table.insert(playerData.vehicles, vehicleId)
+        HC.Vehicles[vehicleId] = data
+    end
+end
+
+function HC.Vehicles.SaveDB(id)
+    local vehData = HC.Vehicles[id]
+    if vehData then
+        print("Vehicles: ID - " .. id .. " storing DB...")
+        
+        exports['mysql-async']:mysql_execute('UPDATE vehicles SET trunk = @trunk, owner = @owner, spawned = @spawned WHERE id = @id', {
+            ['@trunk'] = json.encode(vehData.trunk),
+            ['@owner'] = vehData.ownerKey,
+            ['@spawned'] = vehData.spawned,
+            ['@id'] = vehData.key
+        }, function(rowsChanged)
+            if rowsChanged > 0 then
+                print("Vehicles: Updated1")
+            else
+                print("Vehicles: Update failed")
+            end
+        end)
+    end
+end
+
+function HC.Vehicles.Retrieve(vehicleId)
+    local updated = false
+    local ret = {}
+
+    exports['mysql-async']:mysql_execute('UPDATE vehicles SET spawned = @spawned WHERE id = @id', {
+        ['@spawned'] = 1,
+        ['@id'] = vehicleId
+    }, function(rowsChanged)
+        if rowsChanged > 0 then
+            print("hc:core: Vehicle ID " .. vehicleId .. " retrieved and 'spawned' field updated to 1.")
+        else
+            print("hc:core: Vehicle ID " .. vehicleId .. " not found in the database.")
+        end
+    end)
+
+    exports['mysql-async']:mysql_fetch_all('SELECT * FROM vehicles WHERE id = @id', {
+        ['@id'] = vehicleId
+    }, function(vehData)
+        if vehData[1] then
+            res = vehData[1]
+        else 
+            print("Vehicles: Coudl not retrieve data for vehicel id: " .. vehicleId)
+        end
+        updated = true
+    end)
+
+    while not updated do
+        Wait(1)
+    end
+
+    return {
+        model = tonumber(res.model),
+        trunk = json.decode(res.trunk),
+        ownerKey = res.owner,
+        spawned = true,
+        key = vehicleId
+    }
 end
 
 function HC.Vehicles.TrunkHasItemAmount(playerId, vehicleId, itemName, amount)
@@ -100,7 +179,8 @@ function HC.Vehicles.AddTrunkItem(id, vehicleId, itemName, amount)
 
         -- Update current weight
         trunk.currentWeight = HC.Vehicles.GetTrunkWeight(vehicleId)
-
+       
+        HC.Vehicles.SaveDB(vehicleId)
         print("hc:core: Item " .. itemName .. " added to vehicle ID " .. vehicleId .. " trunk.")
         return true
     else
@@ -186,4 +266,66 @@ function HC.Vehicles.GetPlayerVehicles(id)
         return {}
     end
 end
+
+function HC.Vehicles.GetPlayerGarage(id)
+    local playerData = HC:GetPlayerData(id)
+    if playerData then
+        local vehicles = {}
+        local ownerKey = playerData.key
+        
+        -- Fetch all vehicles from the database where ownerKey is equal to the player's key
+        exports['mysql-async']:mysql_fetch_all('SELECT * FROM vehicles WHERE owner = @owner AND spawned = 0', {
+            ['@owner'] = ownerKey
+        }, function(result)
+            for _, vehicle in ipairs(result) do
+                local vehicleId = vehicle.id
+                local vehicleData = {
+                    key = vehicleId,
+                    model = vehicle.model,
+                    trunk = json.decode(vehicle.trunk),
+                    ownerKey = vehicle.owner,
+                    spawned = vehicle.spawned
+                }
+                HC.Vehicles[vehicleId] = vehicleData
+                table.insert(vehicles, vehicleData)
+            end
+        end)
+
+        -- Ensure the vehicles are retrieved before returning
+        while next(vehicles) == nil do
+            Wait(1)
+        end
+
+        print("hc:core: Retrieved " .. #vehicles .. " vehicles for player ID " .. id)
+
+        return vehicles
+    else
+        print("hc:core: No player data found for player ID " .. id)
+        return {}
+    end
+end
+
+RegisterCommand("hc.getplayergarage", function(source, args, rawCommand)
+    local playerId = tonumber(args[1])
+    if playerId then
+        local vehicles = HC.Vehicles.GetPlayerGarage(playerId)
+        if #vehicles > 0 then
+            for _, vehicle in ipairs(vehicles) do
+                local vehicleId = vehicle.key
+                local vehicleModel = vehicle.model
+                TriggerClientEvent('chat:addMessage', source, {
+                    args = { "HC Core", "Vehicle ID: " .. vehicleId .. " Model: " .. vehicleModel }
+                })
+            end
+        else
+            TriggerClientEvent('chat:addMessage', source, {
+                args = { "HC Core", "No vehicles found for player ID " .. playerId }
+            })
+        end
+    else
+        TriggerClientEvent('chat:addMessage', source, {
+            args = { "HC Core", "Invalid player ID. Usage: /hc.getplayergarage [playerId]" }
+        })
+    end
+end, false)
 
