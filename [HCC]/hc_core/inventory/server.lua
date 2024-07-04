@@ -122,6 +122,14 @@ function HC.Inventory.GetWeight(id)
     return totalWeight
 end
 
+function HC.Inventory.Use(id, item)
+    local fncUse = HC.Config.Items.GetUse(item)
+
+    if fncUse then
+        fncUse(id)
+    end
+end
+
 
 -- Register the command
 RegisterCommand("hc.core.addMoney", function(source, args, rawCommand)

@@ -3,7 +3,9 @@ local HC = exports.hc_core.GetHC()
 -- server.lua or a script where you define cars
 local carsForSale = {
     --panto
-    { model = -431692672 },
+    { model = -431692672 }, --panto
+    { model = -808831384 }, -- baller
+    { model = -2130482718 } --dump
 }
 
 RegisterNetEvent('hc:vehDealer:getCars')

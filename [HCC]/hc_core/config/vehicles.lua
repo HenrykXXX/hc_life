@@ -4,6 +4,18 @@ HC.Config.Vehicles = {
         model = -431692672,
         basePrice = 5000,
         trunkCapacity = 48,
+    },
+    {
+        --baller
+        model = -808831384,
+        basePrice = 15000,
+        trunkCapacity = 96,
+    },
+    {
+        --dump
+        model = -2130482718,
+        basePrice = 500000,
+        trunkCapacity = 480,
     }
 }
 

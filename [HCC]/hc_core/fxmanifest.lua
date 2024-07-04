@@ -28,9 +28,9 @@ server_scripts {
 
     --configuration--
     "config/vehicles.lua",
-
-    --items--
     'config/items.lua',
+    'config/shops.lua',
+    'config/mines.lua',
 
     --inventory--
     'inventory/server.lua',

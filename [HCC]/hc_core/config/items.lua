@@ -7,7 +7,7 @@ HC.Config.Items = {
     },
     {
         name = "pocketsuv",
-        model = -845035989,
+        model = -1249748547,
         basePrice = 5000,
         weight = 1,
     },
@@ -16,6 +16,27 @@ HC.Config.Items = {
         model = -845035989,
         basePrice = 120,
         weight = 5,
+    },
+    {
+        name = "ironore",
+        model = -845035989,
+        basePrice = 120,
+        weight = 2,
+    },
+    {
+        name = "ironbar",
+        model = -845035989,
+        basePrice = 1200,
+        weight = 1,
+    },
+    {
+        name = "jackhammer",
+        model = -1249748547,
+        basePrice = 1500,
+        weight = 4,
+        use = function(src)
+            TriggerClientEvent('hc:mine:start', src)
+        end
     },
 }
 
@@ -47,4 +68,15 @@ function HC.Config.Items.GetWeight(name)
         return 0
     end
 end
+
+function HC.Config.Items.GetUse(name)
+    local item = findItem(name)
+
+    if item then
+        return item.use
+    else
+        return nil
+    end
+end
+
 

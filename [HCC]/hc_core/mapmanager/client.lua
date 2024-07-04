@@ -1,16 +1,18 @@
 Citizen.CreateThread(function()
     -- Configuration array for NPCs
     local npcs = {
-        {npcName = "Market Vendor", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-192.0, 6212.0, 31.5), npcHeading = 180.0},
-        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6204.0, 31.5), npcHeading = 360.0},
-        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0},
-        {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0},
-        {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0},
-        {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0},
+        {npcName = "Market Vendor", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-192.0, 6212.0, 31.5), npcHeading = 180.0, extra = { shop = "market" }},
+        {npcName = "Iron Vender", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-195.0, 6212.0, 31.5), npcHeading = 180.0, extra = { shop = "iron" }},
+
+        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6204.0, 31.5), npcHeading = 360.0, extra = {}},
+        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0, extra = {}},
+        {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0, extra = {}},
+        {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0, extra = {}},
+        {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0, extra = {}},
 
         --airport---
-        {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0},
-        {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_m_m_business_01`, npcCoords = vector3(-1654, -3130, 13.9), npcHeading = 360.0},
+        {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0, extra = {}},
+        {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_m_m_business_01`, npcCoords = vector3(-1654, -3130, 13.9), npcHeading = 360.0, extra = {}},
          -- Add more NPCs in the same format
     }
 
@@ -55,7 +57,7 @@ Citizen.CreateThread(function()
 
                 if IsControlJustReleased(1, 51) then  -- E key
                     print(npc.npcEvent)
-                    TriggerEvent(npc.npcEvent)  -- Triggering the configured event
+                    TriggerEvent(npc.npcEvent, npc.extra)  -- Triggering the configured event
                 end
             end
         end

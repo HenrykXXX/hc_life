@@ -1,12 +1,5 @@
 local HC = exports.hc_core.GetHC()
 
-local Config = {
-    ShopItems = {
-        {name = "pineapple", price = 200000},
-        {name = "applecrate", price = 120}
-    }
-}
-
 
 -- In the market resource
 function processItemSale(src, itemName, amount, price)
@@ -26,12 +19,14 @@ function processItemSale(src, itemName, amount, price)
 end
 
 RegisterNetEvent('hc:shops:market:sellItem')
-AddEventHandler('hc:shops:market:sellItem', function(itemName, amount, cb)
+AddEventHandler('hc:shops:market:sellItem', function(itemName, amount, shopName)
     local src = source
+
+    local shopItems = HC.Config.Shops.GetItems(shopName)
 
     -- Check if the item is sellable at the market
     local price = nil
-    for _, item in ipairs(Config.ShopItems) do
+    for _, item in ipairs(shopItems) do
         if item.name == itemName then
             price = item.price
             break
@@ -49,14 +44,14 @@ end)
 
 -- Server-side Lua to trigger the inventory display
 RegisterNetEvent('hc:shops:showMarket')
-AddEventHandler('hc:shops:showMarket', function()
+AddEventHandler('hc:shops:showMarket', function(name)
     local src = source
 
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
         inventory = HC:GetPlayerData(src).inventory.items,
         money = HC:GetPlayerData(src).money,
         bankMoney = HC:GetPlayerData(src).bankMoney,
-        shopItems = Config.ShopItems
+        shopItems = HC.Config.Shops.GetItems(name)
     })
 end)
 
@@ -83,12 +78,13 @@ end
 
 -- Add the following event handler for item purchases
 RegisterNetEvent('hc:shops:market:buyItem')
-AddEventHandler('hc:shops:market:buyItem', function(itemName, amount, cb)
+AddEventHandler('hc:shops:market:buyItem', function(itemName, amount, shopName)
     local src = source
+    local shopItems = HC.Config.Shops.GetItems(shopName)
 
     -- Check if the item is available for purchase at the market
     local price = nil
-    for _, item in ipairs(Config.ShopItems) do
+    for _, item in ipairs(shopItems) do
         if item.name == itemName then
             price = item.price
             break

@@ -8,6 +8,11 @@ RegisterNUICallback('hideInventory', function(data, cb)
     SetNuiFocus(false, false)
 end)
 
+RegisterNUICallback('useItem', function(data, cb)
+    TriggerServerEvent("hc:inventory:use", data.item)
+    cb('ok')
+end)
+
 AddEventHandler('hc:inventory:show', function()
     requestInventoryData()
 end)
