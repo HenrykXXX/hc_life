@@ -1,34 +1,25 @@
-HCL (HC Life) - FiveM Life/RP Mod
+# HCL (HC Life) - FiveM Life/RP Mod
+
 Welcome to the HCL (HC Life) repository! This mod is designed to recreate the immersive life servers from Arma 3 in FiveM. It's currently in the early development phase, but we're working hard to bring new features and improvements constantly.
 
-Table of Contents
-Introduction
-Features
-Installation
-Usage
-Contributing
-License
-Contact
-Introduction
+## Introduction
+
 The HCL (HC Life) mod aims to provide a rich and immersive role-playing experience on FiveM, inspired by the life servers from Arma 3. Our goal is to create a dynamic world where players can engage in various activities and experience realistic interactions. While the project is in its early development phase, we are committed to adding new features and refining the gameplay continuously.
 
-Features
-Immersive Role-Playing Mechanics: Engage in a variety of activities and scenarios designed to enhance your role-playing experience.
-Dynamic Environment: Experience a world that reacts to your actions and decisions.
-Constant Updates: The mod is continually being improved with new features and optimizations.
-Installation
+## Installation
+
 To install the HCL (HC Life) mod, follow these steps:
 
 Clone the repository to your local machine:
 
 git clone https://github.com/HenrykXXX/HCL.git
-Navigate to the mod directory:
 
+## Usage
 
-Usage
 Once installed, the mod will automatically integrate with your FiveM server. To start using the mod, simply launch your FiveM server as usual. For detailed usage instructions and commands, refer to the USAGE.md file.
 
-Contributing
+## Contributing
+
 Contributions are welcome! If you have ideas for new features, improvements, or bug fixes, feel free to fork the repository and submit a pull request. Please ensure your contributions align with the project's goals and coding standards.
 
 Fork the repository
@@ -37,7 +28,8 @@ Commit your changes (git commit -am 'Add some feature')
 Push to the branch (git push origin feature/your-feature)
 Create a new Pull Request
 
-License
+## License
+
 This project is licensed under the GNU General Public License v3.0. See the LICENSE file for details.
 
 HCL (HC Life) - FiveM Life/RP Mod
@@ -55,5 +47,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-Contact
+## Contact
+
 For any questions, suggestions, or feedback, please open an issue in the repository or contact me directly at henrykxxx92@gmail.com
