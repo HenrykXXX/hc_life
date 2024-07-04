@@ -6,13 +6,17 @@ Welcome to the HCL (HC Life) repository! This mod is designed to recreate the im
 
 The HCL (HC Life) mod aims to provide a rich and immersive role-playing experience on FiveM, inspired by the life servers from Arma 3. Our goal is to create a dynamic world where players can engage in various activities and experience realistic interactions. While the project is in its early development phase, we are committed to adding new features and refining the gameplay continuously.
 
+### Check out the newest version on the HCX Test server. Just search for it in the FiveM server search and join!
+
 ## Installation
 
 To install the HCL (HC Life) mod, follow these steps:
 
 Clone the repository to your local machine:
 
+```bash
 git clone https://github.com/HenrykXXX/HCL.git
+
 
 ## Usage
 
