@@ -15,7 +15,7 @@ To install the HCL (HC Life) mod, follow these steps:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/HenrykXXX/HCL.git
+git clone https://github.com/HenrykXXX/hc_life.git
 ```
 
 ## Usage
