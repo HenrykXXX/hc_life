@@ -14,19 +14,19 @@ function updateInventory(data) {
     const playerItemList = document.getElementById('player-item-list');
     playerItemList.innerHTML = ''; // Clear existing player items
 
-    data.inventory.items.forEach(item => {
+    data.inventory.forEach(item => {
         const li = document.createElement('li');
         const itemImage = document.createElement('img');
         //itemImage.src = `images/${item[0]}.png`; // Assuming item images are stored in an "images" folder
         itemImage.classList.add('item-image');
         li.appendChild(itemImage);
-        li.innerHTML += `${item[0]} - Quantity: ${item[1]}`;
-        li.setAttribute("data-item", item[0]);
+        li.innerHTML += `${item.name} - Quantity: ${item.quantity}`;
+        li.setAttribute("data-item", item.item);
         playerItemList.appendChild(li);
     });
 
     // Update max weight and current weight labels
-    document.getElementById('player-weight').textContent = `${data.inventory.currentWeight}/${data.inventory.maxWeight}kg`;
+    document.getElementById('player-weight').textContent = `${data.currentWeight}/${data.maxWeight}kg`;
     document.getElementById('player-title').textContent = "Inventory";
 }
 

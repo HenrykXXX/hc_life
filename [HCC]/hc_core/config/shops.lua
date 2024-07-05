@@ -31,8 +31,7 @@ function HC.Config.Shops.GetItems(name)
     if shop then
         local ret = {}
         for _, item in ipairs(shop.items) do
-            print(item)
-            table.insert(ret, {name = item, price = HC.Config.Items.GetPrice(item)})
+            table.insert(ret, {item = item, name = HC.Config.Items.GetName(item), price = HC.Config.Items.GetPrice(item)})
         end
         return ret
     else

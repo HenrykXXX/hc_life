@@ -13,6 +13,7 @@ document.getElementById('get-vehicle-button').addEventListener('click', function
         const model = selectedItem.getAttribute('data-model');
         const key = selectedItem.getAttribute('data-id');
         if (!isNaN(model)) {
+            closeGarage();
             fetch(`https://${GetParentResourceName()}/getVehicle`, {
                 method: 'POST',
                 headers: {
@@ -64,16 +65,20 @@ document.getElementById('garage-vehicle-list').addEventListener('click', functio
     }
 });
 
+function closeGarage() {
+    document.getElementById('container').style.display = 'none';
+    // Notify the game to handle the close event
+    fetch(`https://${GetParentResourceName()}/hideGarage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' || event.keyCode === 27) {
-        document.getElementById('container').style.display = 'none';
-        // Notify the game to handle the close event
-        fetch(`https://${GetParentResourceName()}/hideGarage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        closeGarage();
     }
 });

@@ -40,7 +40,7 @@ body, html {
 }
 
 #garage-vehicle-container {
-    height: 60%;
+    max-height: 60%;
     overflow-y: auto;
     margin-top: 20px;
     border: 1px solid white;

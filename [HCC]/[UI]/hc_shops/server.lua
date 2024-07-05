@@ -27,14 +27,14 @@ AddEventHandler('hc:shops:market:sellItem', function(itemName, amount, shopName)
     -- Check if the item is sellable at the market
     local price = nil
     for _, item in ipairs(shopItems) do
-        if item.name == itemName then
+        if item.item == itemName then
             price = item.price
             break
         end
     end
 
     if not price then
-        print("hc:shops: Item " .. itemName .. " cannot be sold at the market.")
+        print("hc:shops: Item " .. itemName .. " cannot be sold at the " .. shopName)
         return
     end
 
@@ -46,9 +46,18 @@ end)
 RegisterNetEvent('hc:shops:showMarket')
 AddEventHandler('hc:shops:showMarket', function(name)
     local src = source
+    local items = {}
+
+    for _, item in ipairs(HC:GetPlayerData(src).inventory.items) do
+        table.insert(items, {
+            item = item[1],
+            quantity = item[2],
+            name = HC.Config.Items.GetName(item[1])
+        })
+    end
 
     TriggerClientEvent('hc:shops:receiveInventoryData', src, {
-        inventory = HC:GetPlayerData(src).inventory.items,
+        inventory = items,
         money = HC:GetPlayerData(src).money,
         bankMoney = HC:GetPlayerData(src).bankMoney,
         shopItems = HC.Config.Shops.GetItems(name)
@@ -85,14 +94,14 @@ AddEventHandler('hc:shops:market:buyItem', function(itemName, amount, shopName)
     -- Check if the item is available for purchase at the market
     local price = nil
     for _, item in ipairs(shopItems) do
-        if item.name == itemName then
+        if item.item == itemName then
             price = item.price
             break
         end
     end
 
     if not price then
-        print("hc:shops: Item " .. itemName .. " is not available for purchase at the market.")
+        print("hc:shops: Item " .. itemName .. " is not available for purchase at the " .. shopName)
         return
     end
 

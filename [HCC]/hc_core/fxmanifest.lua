@@ -31,6 +31,7 @@ server_scripts {
     'config/items.lua',
     'config/shops.lua',
     'config/mines.lua',
+    'config/processing.lua',
 
     --inventory--
     'inventory/server.lua',

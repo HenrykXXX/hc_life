@@ -2,6 +2,7 @@ HC.Inventory = {}
 
 function HC.Inventory.HasItemAmount(playerId, itemName, amount)
     local inventory = HC:GetPlayerData(playerId).inventory
+    
     print("name: " .. itemName .. " amount " .. amount)
     for _, item in ipairs(inventory.items) do
         if item[1] == itemName and item[2] >= amount then
