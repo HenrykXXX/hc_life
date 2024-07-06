@@ -20,7 +20,8 @@ function updateInventory(data) {
         //itemImage.src = `images/${item[0]}.png`; // Assuming item images are stored in an "images" folder
         itemImage.classList.add('item-image');
         li.appendChild(itemImage);
-        li.innerHTML += `${item[0]} - Quantity: ${item[1]}`;
+        li.innerHTML += `${item.name} - Quantity: ${item.quantity}`;
+        li.setAttribute("data-item", item.item);
         playerItemList.appendChild(li);
     });
 
@@ -39,7 +40,8 @@ function updateTrunk(data) {
         //itemImage.src = `images/${item[0]}.png`; // Assuming item images are stored in an "images" folder
         itemImage.classList.add('item-image');
         li.appendChild(itemImage);
-        li.innerHTML += `${item[0]} - Quantity: ${item[1]}`;
+        li.innerHTML += `${item.name} - Quantity: ${item.quantity}`;
+        li.setAttribute("data-item", item.item);
         trunkItemList.appendChild(li);
     });
 
@@ -85,7 +87,7 @@ document.addEventListener('keyup', function(event) {
 document.getElementById('trunk-item-button').addEventListener('click', function() {
     const selectedItem = document.querySelector('#trunk-item-list li.selected');
     if (selectedItem) {
-        const itemName = selectedItem.textContent.split(' - ')[0];
+        const itemName = selectedItem.getAttribute("data-item");
         const amount = parseInt(document.getElementById('trunk-amount').value);
         fetch(`https://${GetParentResourceName()}/getTrunkItem`, {
             method: 'POST',
@@ -100,7 +102,7 @@ document.getElementById('trunk-item-button').addEventListener('click', function(
 document.getElementById('player-item-button').addEventListener('click', function() {
     const selectedItem = document.querySelector('#player-item-list li.selected');
     if (selectedItem) {
-        const itemName = selectedItem.textContent.split(' - ')[0];
+        const itemName = selectedItem.getAttribute("data-item");
         const amount = parseInt(document.getElementById('player-amount').value);
         fetch(`https://${GetParentResourceName()}/storePlayerItem`, {
             method: 'POST',

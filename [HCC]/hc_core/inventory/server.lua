@@ -28,7 +28,7 @@ function HC.Inventory.AddItem(id, itemName, amount)
     local itemWeight = HC.Config.Items.GetWeight(itemName)
     local totalWeight = HC.Inventory.GetWeight(src)
 
-    if (totalWeight + itemWeight) > maxWeight then
+    if (totalWeight + (itemWeight * amount)) > maxWeight then
         print("Not enough space in inventory for player ID: " .. src)
         return false
     end
