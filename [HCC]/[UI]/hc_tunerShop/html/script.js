@@ -147,7 +147,7 @@ window.addEventListener('message', event => {
     }
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keyup', function(event) {
     if (event.key === 'Escape' || event.keyCode === 27) {
         document.querySelector('.container').style.display = 'none';
         fetch(`https://${GetParentResourceName()}/hideTunerShop`, {

@@ -60,7 +60,6 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
             Wait(1)
         end
         
-        HC.Vehicles.AddTrunkItem(id, vehicleId, 'pineapple', 1)
         print("key: ", HC.Vehicles[vehicleId].key)
         print("hc:core: Vehicle " .. vehModel .. " added to player ID " .. id .. " vehicles.")
     else

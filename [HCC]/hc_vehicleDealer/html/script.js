@@ -34,8 +34,8 @@ function buyCar() {
     }
 }
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Backspace' || event.keyCode === 8) {
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
         document.body.style.display = 'none';
         fetch(`https://${GetParentResourceName()}/hideCarDealer`, {
             method: 'POST'

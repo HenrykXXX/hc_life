@@ -10,8 +10,8 @@ function updateBankData(data) {
     document.getElementById('bank-money').textContent = "Bank Money: $" + data.bankMoney;
 }
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Backspace' || event.keyCode === 8) {
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
         document.getElementById('bank-container').style.display = 'none';
         // Notify the game to handle the close event
         fetch(`https://${GetParentResourceName()}/hideBank`, {

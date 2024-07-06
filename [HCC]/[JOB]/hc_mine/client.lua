@@ -1,13 +1,13 @@
 local spawnPos = vector3(2948.0, 2796.0, 41.0)
 local spawnRadius = 30.0
+local isMining = false
 
 RegisterNetEvent('hc:mine:start')
 AddEventHandler('hc:mine:start', function()
     local pp = GetPlayerPed(-1)
     if pp then
         local pc = GetEntityCoords(pp)
-        if #(pc - spawnPos) < spawnRadius * 2.0 then
-            print("Mining...")
+        if #(pc - spawnPos) < spawnRadius then
             TaskStartScenarioInPlace(pp, "WORLD_HUMAN_CONST_DRILL", 0, true)
             TriggerServerEvent('hc:mine:start')
         else

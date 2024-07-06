@@ -16,12 +16,8 @@ body {
   display: none;
 }
 
-/* Hide scrollbars for IE and Edge */
-body {
-  -ms-overflow-style: none;
-}
-
 /* Hide scrollbars for Firefox */
 html {
   scrollbar-width: none;
+  overflow: hidden;
 }
