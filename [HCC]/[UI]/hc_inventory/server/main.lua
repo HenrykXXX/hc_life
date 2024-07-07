@@ -3,6 +3,7 @@ local HC = exports.hc_core.GetHC()
 
 RegisterNetEvent('hc:inventory:use')
 AddEventHandler('hc:inventory:use', function(item)
+    TriggerClientEvent("hc:hint:show", source, "Using item " .. item);
     HC.Inventory.Use(source, item)
 end)
 

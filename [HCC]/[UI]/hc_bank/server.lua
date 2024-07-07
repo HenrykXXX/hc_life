@@ -24,6 +24,7 @@ AddEventHandler('hc:bank:withdraw', function(amount)
         })
     else
         -- Insufficient funds, handle the error
+        TriggerClientEvent("hc:hint:show", src, "Not enough money.")
     end
 end)
 
@@ -40,5 +41,6 @@ AddEventHandler('hc:bank:deposit', function(amount)
         })
     else
         -- Insufficient funds, handle the error
+        TriggerClientEvent("hc:hint:show", src, "Not enough money.")
     end
 end)

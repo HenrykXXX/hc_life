@@ -6,8 +6,8 @@ window.addEventListener('message', function(event) {
 });
 
 function updateBankData(data) {
-    document.getElementById('money').textContent = "Money: $" + data.money;
-    document.getElementById('bank-money').textContent = "Bank Money: $" + data.bankMoney;
+    document.getElementById('money').textContent = "Pocket: $" + data.money;
+    document.getElementById('bank-money').textContent = "Balance: $" + data.bankMoney;
 }
 
 document.addEventListener('keyup', function(event) {

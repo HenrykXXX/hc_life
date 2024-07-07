@@ -1,3 +1,9 @@
 [submodule "[HCD]"]
 	path = [HCD]
 	url = https://github.com/HenrykXXX/hc_dev
+[submodule "[HCM]/mysql-async"]
+	path = [HCM]/mysql-async
+	url = https://github.com/brouznouf/fivem-mysql-async
+[submodule "[HCM]/skinchanger"]
+	path = [HCM]/skinchanger
+	url = https://github.com/mitlight/skinchanger

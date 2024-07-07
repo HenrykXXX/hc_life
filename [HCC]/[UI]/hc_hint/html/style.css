@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+}
+
+.hint {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #000000c0;
+    color: white;
+    width: 400px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: ease 0.3s;
+}
+
+.hint_text{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.hint_show{
+    transform: translateY(0);
+}

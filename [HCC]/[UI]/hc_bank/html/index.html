@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="bank-container" class="hidden">
+    <div id="bank-container">
         <h1>Bank</h1>
         <div id="money-info">
-            <p id="money"></p>
-            <p id="bank-money"></p>
+            <p id="money">Pocket: 4$</p>
+            <p id="bank-money">Balance: 100$</p>
         </div>
         <input type="number" id="amount" placeholder="Amount">
-        <button id="withdraw-btn">Withdraw</button>
-        <button id="deposit-btn">Deposit</button>
-    </div>
+        <div class="buttons">
+            <button id="withdraw-btn">Withdraw</button>
+            <button id="deposit-btn">Deposit</button>
+        </div>
     <script src="script.js"></script>
 </body>
 </html>
