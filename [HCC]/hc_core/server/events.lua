@@ -90,7 +90,7 @@ AddEventHandler('playerJoining', function()
         HC.PlayerData[src].key = license
 
         --HC.Inventory.AddItem(src, 'pineapple', 1)
-        print("hc:core: Player stats initialized for player ID " .. src)
+        print("Player stats initialized for player ID " .. src)
     end)
 end)
 

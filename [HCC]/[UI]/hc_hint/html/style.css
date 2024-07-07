@@ -2,27 +2,33 @@
     margin: 0;
 }
 
-.hint {
+#hintContainer {
     position: absolute;
     right: 0;
     top: 0;
-    background-color: #000000c0;
-    color: white;
-    width: 400px;
-    height: 50px;
+    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(-100%);
-    transition: ease 0.3s;
+    flex-direction: column;
 }
 
-.hint_text{
-    font-size: 1.5rem;
-    text-transform: capitalize;
+#hintContainer li {
+    list-style: none;
+    background-color: #333;
+    color: white;
     letter-spacing: 1px;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin: 1px 0;
+    width: 400px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }
 
-.hint_show{
+/* .hint_show{
     transform: translateY(0);
-}
+    transition: transform 0.3s ease;
+} */
