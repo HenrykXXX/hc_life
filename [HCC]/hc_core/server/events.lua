@@ -91,6 +91,8 @@ AddEventHandler('playerJoining', function()
 
         --HC.Inventory.AddItem(src, 'pineapple', 1)
         print("Player stats initialized for player ID " .. src)
+
+        
     end)
 end)
 

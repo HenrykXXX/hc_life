@@ -68,7 +68,6 @@ AddEventHandler('hc:trunk:getTrunkItem', function(data)
     end
 
     if not HC.Vehicles.TrunkHasItemAmount(src, data.vehicle, itemName, amount) then
-        print("not enough items in inventory")
         return
     end
 
@@ -92,7 +91,6 @@ AddEventHandler('hc:trunk:storePlayerItem', function(data)
     end
 
     if not HC.Inventory.HasItemAmount(src, itemName, amount) then
-        print("not enough items in inventory")
         return
     end
 

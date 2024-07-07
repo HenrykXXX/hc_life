@@ -137,12 +137,14 @@ end
 
 function HC.Vehicles.TrunkHasItemAmount(playerId, vehicleId, itemName, amount)
     local trunk = HC:GetVehicleData(vehicleId).trunk
-    print("name: " .. itemName .. " amount " .. amount)
+
     for _, item in ipairs(trunk.items) do
         if item[1] == itemName and item[2] >= amount then
             return true
         end
     end
+
+    TriggerClientEvent("hc:hint:show", playerId, "Not enough items in trunk.")
     return false
 end
 
@@ -157,7 +159,7 @@ function HC.Vehicles.AddTrunkItem(id, vehicleId, itemName, amount)
         local totalWeight = HC.Vehicles.GetTrunkWeight(vehicleId)
 
         if (totalWeight + itemWeight * amount) > maxWeight then
-            print("Not enough space in vehicle trunk for vehicle ID: " .. vehicleId)
+            TriggerClientEvent("hc:hint:show", playerId, "Not enough space in trunk.")
             return false
         end
 
@@ -180,10 +182,10 @@ function HC.Vehicles.AddTrunkItem(id, vehicleId, itemName, amount)
         trunk.currentWeight = HC.Vehicles.GetTrunkWeight(vehicleId)
        
         HC.Vehicles.SaveDB(vehicleId)
-        print("hc:core: Item " .. itemName .. " added to vehicle ID " .. vehicleId .. " trunk.")
+        print("Vehicles: Item " .. itemName .. " added to vehicle ID " .. vehicleId .. " trunk.")
         return true
     else
-        print("hc:core: Vehicle ID " .. vehicleId .. " not found.")
+        print("Vehicles: Vehicle ID " .. vehicleId .. " not found.")
         return false
     end
 end

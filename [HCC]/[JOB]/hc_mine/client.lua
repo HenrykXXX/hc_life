@@ -24,6 +24,8 @@ AddEventHandler('hc:mine:continue', function(continue)
     end
 
     if continue then
+        TriggerEvent("hc:hint:show", "Collected Iron Ore.")
+
         local pc = GetEntityCoords(pp)
         PlaySoundFromCoord(-1, "PICK_UP", pc.x, pc.y, pc.z, "HUD_FRONTEND_DEFAULT_SOUNDSET", false, 0, false)
     else

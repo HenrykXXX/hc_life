@@ -11,6 +11,8 @@ AddEventHandler('hc:processing:continue', function(continue)
     end
 
     if continue then
+        TriggerEvent("hc:hint:show", "Melted Iron Ore to Iron Bar.")
+        
         local pc = GetEntityCoords(pp)
         PlaySoundFromCoord(-1, "PICK_UP", pc.x, pc.y, pc.z, "HUD_FRONTEND_DEFAULT_SOUNDSET", false, 0, false)
     else

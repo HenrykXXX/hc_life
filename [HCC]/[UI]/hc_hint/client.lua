@@ -7,6 +7,9 @@ end
 
 RegisterNetEvent('hc:hint:show')
 AddEventHandler('hc:hint:show', function(msg)
+    -- Play the notification sound
+    PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", true)
+
     showHint(msg)
 end)
 

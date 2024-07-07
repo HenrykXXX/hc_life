@@ -9,6 +9,7 @@ function HC.Inventory.HasItemAmount(playerId, itemName, amount)
             return true
         end
     end
+    TriggerClientEvent("hc:hint:show", playerId, "Not enough items in inventory.")
     return false
 end
 
@@ -17,7 +18,7 @@ function HC.Inventory.AddItem(id, itemName, amount)
     
     local playerStats = HC:GetPlayerData(src)
     if not playerStats then
-        print("hc:core: No player stats found for player ID " .. src)
+        print("Inventory: No player stats found for player ID " .. src)
         return
     end
 
@@ -29,7 +30,7 @@ function HC.Inventory.AddItem(id, itemName, amount)
     local totalWeight = HC.Inventory.GetWeight(src)
 
     if (totalWeight + (itemWeight * amount)) > maxWeight then
-        print("Not enough space in inventory for player ID: " .. src)
+        TriggerClientEvent("hc:hint:show", id, "Not enough space in inventory.")
         return false
     end
 
@@ -63,7 +64,7 @@ function HC.Inventory.RemoveItem(playerId, itemName, amount)
     local playerStats = HC:GetPlayerData(src)
 
     if not playerStats then
-        print("hc:core: No player stats found for player ID " .. src)
+        print("Inventory: No player stats found for player ID " .. src)
         return
     end
 
@@ -88,9 +89,9 @@ function HC.Inventory.RemoveItem(playerId, itemName, amount)
     inventory.currentWeight = HC.Inventory.GetWeight(src)
 
     if not itemFound then
-        print("hc:core: Item " .. itemName .. " not found in player ID " .. src .. " inventory.")
+        print("Inventory: Item " .. itemName .. " not found in player ID " .. src .. " inventory.")
     else
-        print("hc:core: Item " .. itemName .. " removed from player ID " .. src .. " inventory.")
+        print("Inventory: Item " .. itemName .. " removed from player ID " .. src .. " inventory.")
     end
 end
 
