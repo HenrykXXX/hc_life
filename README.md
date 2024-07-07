@@ -12,11 +12,27 @@ The HCL (HC Life) mod aims to provide a rich and immersive role-playing experien
 
 To install the HCL (HC Life) mod, follow these steps:
 
-Clone the repository to your local machine:
+Clone the repository to your server resources:
 
 ```bash
 git clone https://github.com/HenrykXXX/hc_life.git
 ```
+
+Change folder name from hc_life to [HCL]
+
+Create db from hcl.sql file.
+
+Copy hcl.cfg to your server data and add:
+
+```bash
+exec hcl.cfg
+```
+
+At the end of Your server.cfg
+
+Edit mysql login data in hcl.cfg
+
+Start Your server!
 
 ## Usage
 
