@@ -43,7 +43,7 @@ AddEventHandler('playerJoining', function()
     end
 
     -- Check if the player exists in the database
-    exports['mysql-async']:mysql_fetch_all('SELECT * FROM users WHERE identifier = @identifier', {
+    HC.DB.FetchAll('SELECT * FROM users WHERE identifier = @identifier', {
         ['@identifier'] = license
     }, function(result)
         if result[1] then
@@ -69,7 +69,7 @@ AddEventHandler('playerJoining', function()
                 vehicles = {}
             }
 
-            exports['mysql-async']:mysql_execute('INSERT INTO users (identifier, license, steam, discord, xbl, live, ip, name, money, bank, inventory, vehicles) VALUES (@identifier, @license, @steam, @discord, @xbl, @live, @ip, @name, @money, @bank, @inventory, @vehicles)', {
+            HC.DB.Execute('INSERT INTO users (identifier, license, steam, discord, xbl, live, ip, name, money, bank, inventory, vehicles) VALUES (@identifier, @license, @steam, @discord, @xbl, @live, @ip, @name, @money, @bank, @inventory, @vehicles)', {
                 ['@identifier'] = license or NULL,
                 ['@license'] = license or NULL,
                 ['@steam'] = steamid or NULL,
@@ -101,7 +101,7 @@ AddEventHandler('playerDropped', function(reason)
     local src = source
     if HC.PlayerData[src] then
         -- Save player data to the database before removing from memory
-        exports['mysql-async']:mysql_execute('UPDATE users SET money = @money, bank = @bank, inventory = @inventory, vehicles = @vehicles WHERE identifier = @identifier', {
+        HC.DB.Execute('UPDATE users SET money = @money, bank = @bank, inventory = @inventory, vehicles = @vehicles WHERE identifier = @identifier', {
             ['@identifier'] = HC.PlayerData[src].key, --string.sub(GetPlayerIdentifier(src, 0), string.len("license:") + 1),
             ['@money'] = HC.PlayerData[src].money,
             ['@bank'] = HC.PlayerData[src].bankMoney,

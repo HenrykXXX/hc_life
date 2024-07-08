@@ -37,13 +37,13 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
 
         local vehicleData = HC.Vehicles[vehicleId]
         HC.Vehicles.last = vehicleId
-        exports['mysql-async']:mysql_execute('INSERT INTO vehicles (model, trunk, owner, spawned) VALUES (@model, @trunk, @owner, @spawned)', {
+        HC.DB.Execute('INSERT INTO vehicles (model, trunk, owner, spawned) VALUES (@model, @trunk, @owner, @spawned)', {
             ['@model'] = vehicleData.model,
             ['@trunk'] = json.encode(vehicleData.trunk),
             ['@owner'] = vehicleData.ownerKey,
             ['@spawned'] = vehicleData.spawned
         }, function(rowsChanged)
-            exports['mysql-async']:mysql_fetch_all('SELECT MAX(id) AS id FROM vehicles', {}, function(result)
+            HC.DB.FetchAll('SELECT MAX(id) AS id FROM vehicles', {}, function(result)
                 local vid = result[1].id
                 print("Vehicles: DBID - " .. vid)
 
@@ -81,7 +81,7 @@ function HC.Vehicles.SaveDB(id)
     if vehData then
         print("Vehicles: ID - " .. id .. " storing DB...")
         
-        exports['mysql-async']:mysql_execute('UPDATE vehicles SET trunk = @trunk, owner = @owner, spawned = @spawned WHERE id = @id', {
+        HC.DB.Execute('UPDATE vehicles SET trunk = @trunk, owner = @owner, spawned = @spawned WHERE id = @id', {
             ['@trunk'] = json.encode(vehData.trunk),
             ['@owner'] = vehData.ownerKey,
             ['@spawned'] = vehData.spawned,
@@ -100,7 +100,7 @@ function HC.Vehicles.Retrieve(vehicleId)
     local updated = false
     local ret = {}
 
-    exports['mysql-async']:mysql_execute('UPDATE vehicles SET spawned = @spawned WHERE id = @id', {
+    HC.DB.Execute('UPDATE vehicles SET spawned = @spawned WHERE id = @id', {
         ['@spawned'] = 1,
         ['@id'] = vehicleId
     }, function(rowsChanged)
@@ -111,7 +111,7 @@ function HC.Vehicles.Retrieve(vehicleId)
         end
     end)
 
-    exports['mysql-async']:mysql_fetch_all('SELECT * FROM vehicles WHERE id = @id', {
+    HC.DB.FetchAll('SELECT * FROM vehicles WHERE id = @id', {
         ['@id'] = vehicleId
     }, function(vehData)
         if vehData[1] then
@@ -275,7 +275,7 @@ function HC.Vehicles.GetPlayerGarage(id)
         local ownerKey = playerData.key
         
         -- Fetch all vehicles from the database where ownerKey is equal to the player's key
-        exports['mysql-async']:mysql_fetch_all('SELECT * FROM vehicles WHERE owner = @owner AND spawned = 0', {
+        HC.DB.FetchAll('SELECT * FROM vehicles WHERE owner = @owner AND spawned = 0', {
             ['@owner'] = ownerKey
         }, function(result)
             for _, vehicle in ipairs(result) do

@@ -24,7 +24,10 @@ client_scripts {
 
 server_scripts {
     'server/main.lua',
+    'db/server.lua',
+
     "server/events.lua",
+
 
     --configuration--
     "config/vehicles.lua",
