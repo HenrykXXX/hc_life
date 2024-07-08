@@ -53,7 +53,10 @@ AddEventHandler('playerJoining', function()
                 money = playerData.money,
                 bankMoney = playerData.bank,
                 inventory = json.decode(playerData.inventory),
-                vehicles = json.decode(playerData.vehicles) or {}
+                vehicles = json.decode(playerData.vehicles) or {},
+                police = {
+                    rank = playerData.policeRank
+                }
             }
             print("hc:core: Player data loaded from database for player ID " .. src)
         else
@@ -66,7 +69,10 @@ AddEventHandler('playerJoining', function()
                     maxWeight = 24,
                     currentWeight = 0
                 }, -- Empty inventory
-                vehicles = {}
+                vehicles = {},
+                police = {
+                    rank = 0
+                }
             }
 
             HC.DB.Execute('INSERT INTO users (identifier, license, steam, discord, xbl, live, ip, name, money, bank, inventory, vehicles) VALUES (@identifier, @license, @steam, @discord, @xbl, @live, @ip, @name, @money, @bank, @inventory, @vehicles)', {

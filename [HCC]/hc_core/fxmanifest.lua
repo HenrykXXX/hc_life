@@ -49,3 +49,8 @@ server_scripts {
     'time/server.lua'
 }
 
+dependencies = {
+    "mysql-async",
+    'skinchanger'
+}
+
