@@ -5,11 +5,11 @@ Citizen.CreateThread(function()
         {npcName = "Iron Vender", npcEvent = "hc:shops:showMarket", npcModel = `a_m_m_business_01`, npcCoords = vector3(-195.0, 6212.0, 31.5), npcHeading = 180.0, extra = { shop = "iron" }},
         {npcName = "Iron Processing", npcEvent = "hc:processing:start", npcModel = `a_m_m_business_01`, npcCoords = vector3(1778.0, 3310.0, 41.2), npcHeading = 270.0, extra = { proc = "ironore" }},
 
-        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-200.0, 6204.0, 31.5), npcHeading = 360.0, extra = {}},
-        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0, extra = {}},
+        {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-333.0, 6084.0, 31.0), npcHeading = 219.0, extra = {}},
+        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0, extra = {}},
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0, extra = {}},
-        {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0, extra = {}},
+        {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
 
         --airport---
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0, extra = {}},
@@ -28,7 +28,7 @@ Citizen.CreateThread(function()
         end
 
         -- Create the NPC
-        local ped = CreatePed(4, npc.npcModel, npc.npcCoords.x, npc.npcCoords.y, npc.npcCoords.z - 1.0, npc.npcHeading, false, true)
+        local ped = CreatePed(4, npc.npcModel, npc.npcCoords.x, npc.npcCoords.y, npc.npcCoords.z - 1.0, npc.npcHeading, false, false)
         FreezeEntityPosition(ped, true)  -- NPC won't move
         SetEntityInvincible(ped, true)  -- NPC won't die
         SetBlockingOfNonTemporaryEvents(ped, true)  -- NPC won't react to the environment

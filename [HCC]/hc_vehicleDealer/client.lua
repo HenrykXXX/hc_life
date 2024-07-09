@@ -1,5 +1,8 @@
+local spawnPoint = nil
+
 RegisterNetEvent('hc:vehDealer:callOpenMenu')
-AddEventHandler('hc:vehDealer:callOpenMenu', function()
+AddEventHandler('hc:vehDealer:callOpenMenu', function(extra)
+    spawnPoint = extra
     TriggerServerEvent("hc:vehDealer:getCars")
 end)
 
@@ -26,8 +29,8 @@ RegisterNetEvent('hc:vehDealer:spawnCar')
 AddEventHandler('hc:vehDealer:spawnCar', function(carModel)
     local playerPed = PlayerPedId()
 
-    local coords = GetEntityCoords(playerPed)
-    local heading = GetEntityHeading(playerPed)
+    local coords = spawnPoint.spawnPoint --GetEntityCoords(playerPed)
+    local heading = spawnPoint.heading --GetEntityHeading(playerPed)
     
     RequestModel(carModel)
 

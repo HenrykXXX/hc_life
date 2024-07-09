@@ -1,3 +1,5 @@
+local spawnPoint = nil
+
 -- Lua: client.lua
 RegisterNUICallback('getVehicle', function(data, cb)
     TriggerServerEvent('hc:garage:getVehicle', data.model, data.key)
@@ -5,7 +7,8 @@ RegisterNUICallback('getVehicle', function(data, cb)
 end)
 
 RegisterNetEvent('hc:garage:show')
-AddEventHandler('hc:garage:show', function()
+AddEventHandler('hc:garage:show', function(extra)
+    spawnPoint = extra
     TriggerServerEvent('hc:garage:show')
 end)
 
@@ -37,8 +40,8 @@ AddEventHandler('hc:garage:spawnVehicle', function(data)
     
     local playerPed = PlayerPedId()
 
-    local coords = GetEntityCoords(playerPed)
-    local heading = GetEntityHeading(playerPed)
+    local coords = spawnPoint.spawnPoint --GetEntityCoords(playerPed)
+    local heading = spawnPoint.heading --GetEntityHeading(playerPed)
     
     RequestModel(tonumber(model))
 
