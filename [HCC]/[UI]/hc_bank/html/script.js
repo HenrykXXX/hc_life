@@ -1,7 +1,7 @@
 window.addEventListener('message', function(event) {
     if (event.data.type === "show") {
         updateBankData(event.data);
-        document.getElementById('bank-container').style.display = 'block';
+        document.getElementById('bank-container').style.display = 'flex';
     }
 });
 
