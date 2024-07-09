@@ -1,4 +1,9 @@
 /* Basic styles for the body */
+
+* {
+  overflow: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -9,6 +14,7 @@ body {
 
 #myCanvas {
   background-color: black;
+  overflow: hidden;
 }
 
 /* Hide scrollbars for WebKit browsers (Chrome, Safari) */
