@@ -8,9 +8,33 @@
 </head>
 <body>
     <div id="carDealer">
-        <h1>Car Dealer</h1>
-        <ul id="carList"></ul>
-        <button onclick="buyCar()">Buy Car</button>
+        <div class="car-list">
+            <h1>Car Dealer</h1>
+            <ul id="carList">
+                <li class="list car-listed">Adder</li>
+                <li class="list car-listed">Zentorno</li>
+            </ul>
+        </div>
+        <div class="car-info">
+            <h2 id="carName">Car name</h2>
+            <img id="carImage" src="https://static.wikia.nocookie.net/gtawiki/images/9/9e/Adder-GTAV-front.png/revision/latest?cb=20230402200727" alt="Car image"/>
+            <p id="carSpeed">Speed:</p>
+            <p id="carSeats">Seats:</p>
+            <p id="carTrunk">Trunk space:</p>
+            <div class="car-colors">
+                <p>Colors</p>
+                <ul class="color-list">
+                    <li class="color color-green"></li>
+                    <li class="color color-black"></li>
+                    <li class="color color-white"></li>
+                    <li class="color color-red"></li>
+                    <li class="color color-yellow"><li>
+                    <li class="color color-blue"></li>
+                </ul>
+            </div>
+            <p id="car-price">Price:</p>
+            <button onclick="buyCar()" class="btn-buy">Buy Car</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
