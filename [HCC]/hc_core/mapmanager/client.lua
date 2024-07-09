@@ -10,7 +10,8 @@ Citizen.CreateThread(function()
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0, extra = {}},
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0, extra = {}},
         {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
-
+        {npcName = "Clothing", npcEvent = "hc:clothing:getBag", npcModel = `a_f_m_business_02`, npcCoords = vector3(-2.0, 6511.5, 31.5), npcHeading = 366.0, extra = {}},
+        
         --airport---
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0, extra = {}},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_m_m_business_01`, npcCoords = vector3(-1654, -3130, 13.9), npcHeading = 360.0, extra = {}},

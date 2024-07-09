@@ -2,17 +2,28 @@
 AddEventHandler('playerSpawned', function()
     local playerPed = PlayerPedId()
     
-    local continue = false
-	TriggerEvent('skinchanger:loadDefaultModel', true, function()
-		continue = true
-	end)
-	
-	while not continue do
-		Wait(100)
+    local model = GetHashKey("mp_m_freemode_01")
+        
+    -- Request the model
+    RequestModel(model)
+        
+    -- Wait until the model is loaded
+    while not HasModelLoaded(model) do
+        Wait(1)
     end
-
-    TriggerEvent("sc:defaultSkin")
+        
+    -- Set the player model
+    SetPlayerModel(PlayerId(), model)
+        
+    -- Set the player's ped to the new model
+    local playerPed = PlayerPedId()
+    SetPedDefaultComponentVariation(playerPed)
+        
+    TriggerServerEvent("hc:core:playerSpawned")
     
+    -- Release the model
+    SetModelAsNoLongerNeeded(model)
+
     -- Set player ped relationship to prevent friendly fire
     SetPedRelationshipGroupHash(playerPed, GetHashKey("PLAYER"))
     SetRelationshipBetweenGroups(5, GetHashKey("PLAYER"), GetHashKey("PLAYER")) -- 1 = Neutral/Ignore

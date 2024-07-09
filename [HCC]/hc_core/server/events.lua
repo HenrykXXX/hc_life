@@ -1,5 +1,5 @@
 local function resetSpawnedField()
-    exports['mysql-async']:mysql_execute('UPDATE vehicles SET spawned = 0 WHERE spawned = 1', {}, function(rowsChanged)
+    HC.DB.Execute('UPDATE vehicles SET spawned = 0 WHERE spawned = 1', {}, function(rowsChanged)
         if rowsChanged > 0 then
             print("hc:core: Reset 'spawned' field for " .. rowsChanged .. " vehicles.")
         else
@@ -50,6 +50,9 @@ AddEventHandler('playerJoining', function()
             -- Player found in the database, load their data
             local playerData = result[1]
             HC.PlayerData[src] = {
+                gameInfo = {
+                    firstSpawn = true
+                },
                 money = playerData.money,
                 bankMoney = playerData.bank,
                 inventory = json.decode(playerData.inventory),
@@ -62,6 +65,9 @@ AddEventHandler('playerJoining', function()
         else
             -- Player not found in the database, insert default values
             HC.PlayerData[src] = {
+                gameInfo = {
+                    firstSpawn = true
+                },
                 money = 100000, -- Default money
                 bankMoney = 5000, -- Default bank money
                 inventory = {
@@ -117,5 +123,25 @@ AddEventHandler('playerDropped', function(reason)
             HC.PlayerData[src] = nil
             print("hc:core: Player data saved to database and removed from memory for player ID " .. src)
         end)
+    end
+end)
+
+
+RegisterNetEvent("hc:core:playerSpawned")
+AddEventHandler("hc:core:playerSpawned", function()
+    local src = source
+    local pd = HC:GetPlayerData(src)
+
+    if pd then
+
+        if not pd.gameInfo.firstSpawn then
+            HC.Inventory.Empty(src)
+        end 
+        
+        if pd.inventory.maxWeight == 64 then
+            TriggerClientEvent("hc:clothing:getBag", src)
+        end
+
+        pd.gameInfo.firstSpawn = false
     end
 end)

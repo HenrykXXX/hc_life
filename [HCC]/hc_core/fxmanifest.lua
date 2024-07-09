@@ -51,6 +51,7 @@ server_scripts {
 
 dependencies = {
     "mysql-async",
-    'skinchanger'
+    'skinchanger',
+    'hc_clothing'
 }
 

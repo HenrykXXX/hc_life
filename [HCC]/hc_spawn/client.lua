@@ -14,7 +14,6 @@ RegisterNUICallback('selectSpawn', function(data, cb)
         DisplayRadar(true)
         local pos = spawnPoints[spawnIdx]
         SetEntityCoords(PlayerPedId() , pos.x, pos.y, pos.z, false, false, false, false)
-        --hc.com.teleportPlayerToGround(pos.x, pos.y, pos.z)
         SetNuiFocus(false, false)
         SendNUIMessage({type = 'hide'})
     end

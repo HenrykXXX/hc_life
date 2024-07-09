@@ -29,13 +29,13 @@ AddEventHandler("hc:police:recieveGear", function(rank)
 		end
 
 		-- Remove all weapons
-		RemoveAllPedWeapons(pp, true)
+		RemoveAllPedWeapons(PlayerPedId(), true)
 
 		-- Add stun gun
-		GiveWeaponToPed(pp, GetHashKey("WEAPON_STUNGUN"), 60, false, true)
+		GiveWeaponToPed(PlayerPedId(), GetHashKey("WEAPON_STUNGUN"), 60, false, true)
 	
 		-- Add police baton
-		GiveWeaponToPed(pp, GetHashKey("WEAPON_NIGHTSTICK"), 1, false, true)
+		GiveWeaponToPed(PlayerPedId(), GetHashKey("WEAPON_NIGHTSTICK"), 1, false, true)
 		
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			uniformObject = {

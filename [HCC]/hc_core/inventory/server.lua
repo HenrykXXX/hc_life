@@ -132,6 +132,24 @@ function HC.Inventory.Use(id, item)
     end
 end
 
+function HC.Inventory.Empty(id)
+    local pd = HC:GetPlayerData(id)
+    if not pd then
+        return
+    end
+
+    local inv = pd.inventory
+
+    inv.items = {}
+    inv.maxWeight = 24
+    inv.currentWeight = 0
+end
+
+function HC.Inventory.SetMaxWeight(id, maxWeight)
+    HC:GetPlayerData(id).inventory.maxWeight = maxWeight
+end
+
+
 
 -- Register the command
 RegisterCommand("hc.core.addMoney", function(source, args, rawCommand)
