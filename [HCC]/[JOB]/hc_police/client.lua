@@ -1,3 +1,4 @@
+local HC = exports.hc_core.GetHC()
 local isHandcuffed = false
 
 local function getPoliceGear()
@@ -57,8 +58,9 @@ AddEventHandler("hc:police:recieveGear", function(rank)
 	end
 end)
 
-RegisterNetEvent('hc_police:handcuff')
-AddEventHandler('hc_police:handcuff', function()
+RegisterNetEvent('hc:police:restrain')
+AddEventHandler('hc:police:restrain', function(cop)
+	print(cop)
 	isHandcuffed = not isHandcuffed
 	local playerPed = PlayerPedId()
 
@@ -75,7 +77,7 @@ AddEventHandler('hc_police:handcuff', function()
 		DisablePlayerFiring(playerPed, true)
 		SetCurrentPedWeapon(playerPed, `WEAPON_UNARMED`, true) -- unarm player
 		SetPedCanPlayGestureAnims(playerPed, false)
-		FreezeEntityPosition(playerPed, true)
+		--FreezeEntityPosition(playerPed, true)
 		DisplayRadar(false)
 	else
 		ClearPedSecondaryTask(playerPed)
@@ -87,6 +89,12 @@ AddEventHandler('hc_police:handcuff', function()
 	end
 end)
 
-RegisterCommand("hc.cop.handcuff", function()
-    TriggerEvent("hc_police:handcuff")
+RegisterCommand("hc.cop.restrain", function()
+    local targetPed = HC.Utils.GetCursorTargetEntity()
+	local targetId = NetworkGetPlayerIndexFromPed(targetPed)
+	local target = GetPlayerServerId(targetId)
+	print("target: " .. target)
+	if target then
+		TriggerServerEvent("hc:police:restrain", target)
+	end
 end, false)

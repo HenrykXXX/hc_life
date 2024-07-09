@@ -26,6 +26,10 @@ AddEventHandler('playerSpawned', function()
 
     -- Set player ped relationship to prevent friendly fire
     SetPedRelationshipGroupHash(playerPed, GetHashKey("PLAYER"))
-    SetRelationshipBetweenGroups(5, GetHashKey("PLAYER"), GetHashKey("PLAYER")) -- 1 = Neutral/Ignore
+    SetRelationshipBetweenGroups(1, GetHashKey("PLAYER"), GetHashKey("PLAYER")) -- 3 = Neutral/Ignore
+
+    NetworkSetFriendlyFireOption(true)
+    SetCanAttackFriendly(PlayerPedId(), true, false)
 end)
+
 

@@ -13,3 +13,9 @@ AddEventHandler("hc:police:getGear", function()
     local rank = pd.police.rank
     TriggerClientEvent("hc:police:recieveGear", src, rank)
 end)
+
+RegisterNetEvent('hc:police:restrain')
+AddEventHandler('hc:police:restrain', function(target)
+	TriggerClientEvent("hc:police:restrain", target, source)
+    print("target:  " .. target)
+end)

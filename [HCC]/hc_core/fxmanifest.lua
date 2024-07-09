@@ -19,7 +19,9 @@ client_scripts {
     'mapmanager/client.lua',
 
     --vehicles--
-    'vehicles/client.lua'
+    'vehicles/client.lua',
+
+    'utils/client.lua'
 }
 
 server_scripts {
