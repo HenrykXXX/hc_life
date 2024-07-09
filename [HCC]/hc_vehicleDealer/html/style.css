@@ -21,7 +21,7 @@ body {
 
 .car-list,
 .car-info {
-    background-color: #ffffff21;
+    border: 2px solid white;
     padding: 10px 35px;
 }
 
@@ -38,6 +38,7 @@ ul {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 1rem;
     gap: 10px;
 }
 
