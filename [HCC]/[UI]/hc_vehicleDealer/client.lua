@@ -1,27 +1,28 @@
 local spawnPoint = nil
 
-RegisterNetEvent('hc:vehDealer:callOpenMenu')
-AddEventHandler('hc:vehDealer:callOpenMenu', function(extra)
+AddEventHandler('hc:vehDealer:show', function(extra)
     spawnPoint = extra
-    TriggerServerEvent("hc:vehDealer:getCars")
+    TriggerServerEvent("hc:vehDealer:getVehicles")
 end)
 
 RegisterNetEvent('hc:vehDealer:openMenu')
-AddEventHandler('hc:vehDealer:openMenu', function(cars)
-    for _, veh in ipairs(cars) do
+AddEventHandler('hc:vehDealer:openMenu', function(vehs)
+    for _, veh in ipairs(vehs) do
         veh.name = GetDisplayNameFromVehicleModel(veh.model)
+        veh.seats = GetVehicleModelNumberOfSeats(veh.model)
+        veh.maxSpeed = math.floor(GetVehicleModelMaxSpeed(veh.model) * 3.6 + 0.5)
     end
-    
+
     SendNUIMessage({
-        type = "OPEN_MENU",
-        cars = cars
+        type = "show",
+        vehs = vehs
     })
     SetNuiFocus(true, true)
 end)
 
-RegisterNUICallback('buyCar', function(data, cb)
-    local car = data.car
-    TriggerServerEvent('hc:vehDealer:buyCar', car)
+RegisterNUICallback('buyVeh', function(data, cb)
+    local veh = data.veh
+    TriggerServerEvent('hc:vehDealer:buyCar', veh)
     cb('ok')
 end)
 
@@ -47,7 +48,7 @@ AddEventHandler('hc:vehDealer:spawnCar', function(carModel)
     TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
 end)
 
-RegisterNUICallback('hideCarDealer', function(data, cb)
+RegisterNUICallback('hide', function(data, cb)
     cb('ok')
     SetNuiFocus(false, false)
 end)

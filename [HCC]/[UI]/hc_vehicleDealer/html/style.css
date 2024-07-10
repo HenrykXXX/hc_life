@@ -3,7 +3,7 @@ body {
     background-color: transparent;
     color: white;
     user-select: none;
-    /* display: none; */
+    display: none;
 }
 
 #carDealer {

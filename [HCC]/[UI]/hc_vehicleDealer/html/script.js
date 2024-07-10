@@ -1,56 +1,67 @@
 // script.js
 window.addEventListener('message', function(event) {
-    if (event.data.type === "OPEN_MENU") {
-        const cars = event.data.cars;
-        const ul = document.getElementById('carList');
-        ul.innerHTML = '';
-        cars.forEach(car => {
-            const li = document.createElement('li');
-            li.textContent = `${car.name} - $${car.price}`;
-            li.onclick = () => selectCar(car);
-            ul.appendChild(li);
-        });
+    if (event.data.type === "show") {
+        updateVehicles(event.data.vehs);
+        
         document.body.style.display = 'block' ;
     }
 });
 
-let selectedCar = null;
-
-function selectCar(car) {
-    selectedCar = car;
-    fetch(`...`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('carName').textContent = data.name;
-            document.getElementById('carImage').src = data.image;
-            document.getElementById('carSpeed').textContent = `Speed: ${data.speed}`;
-            document.getElementById('carSeats').textContent = `Seats: ${data.seats}`;
-            document.getElementById('carTrunk').textContent = `Trunk space: ${data.trunk}`;
-            document.getElementById('carPrice').textContent = `Price: $${data.price}`;
-        })
-        .catch(error => console.error('Error fetching car details:', error));
+function updateVehicles(vehs) {
+    const ul = document.getElementById('carList');
+    ul.innerHTML = '';
+    const firstVeh = vehs[0];
+    vehs.forEach(veh => {
+        //<li class="list car-listed">Adder</li>
+        const li = document.createElement('li');
+        li.textContent = `${veh.name} - $${veh.price}`;
+        li.className = 'list car-listed';
+        li.onclick = () => selectVeh(veh);
+        ul.appendChild(li);
+    });
+    selectVeh(firstVeh);
 }
 
-function buyCar() {
-    if (selectedCar) {
-        fetch(`https://${GetParentResourceName()}/buyCar`, {
+let selectedVeh = null;
+
+function selectVeh(veh) {
+    console.log("select");
+    selectedVeh = veh;
+
+    document.getElementById('carName').textContent = veh.name;
+    //document.getElementById('carImage').src = data.image;
+    document.getElementById('carSpeed').textContent = `Speed: ${veh.maxSpeed} km/h`;
+    document.getElementById('carSeats').textContent = `Seats: ${veh.seats}`;
+    document.getElementById('carTrunk').textContent = `Trunk space: ${veh.trunkSpace}kg`;
+    document.getElementById('car-price').textContent = `Price: $${veh.price}`;
+}
+
+function buyVeh() {
+    if (selectedVeh) {
+        fetch(`https://${GetParentResourceName()}/buyVeh`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ car: selectedCar })
+            body: JSON.stringify({ veh: selectedVeh })
         }).then(res => res.json()).then(data => {
             console.log(data);
         });
+        hideVehDealer();
     }
 }
 
-document.addEventListener('keyup', function(event) {
-    if (event.key === 'Escape' || event.keyCode === 27) {
-        document.body.style.display = 'none';
-        fetch(`https://${GetParentResourceName()}/hideCarDealer`, {
+function hideVehDealer() {
+    document.body.style.display = 'none';
+        fetch(`https://${GetParentResourceName()}/hide`, {
             method: 'POST'
         }).then(resp => resp.json()).then(resp => console.log(resp));
+}
+
+
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
+        hideVehDealer();
     }
 });
 

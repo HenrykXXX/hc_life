@@ -8,12 +8,15 @@ local carsForSale = {
     { model = -2130482718 } --dump
 }
 
-RegisterNetEvent('hc:vehDealer:getCars')
-AddEventHandler('hc:vehDealer:getCars', function()
+RegisterNetEvent('hc:vehDealer:getVehicles')
+AddEventHandler('hc:vehDealer:getVehicles', function()
     local vehicles = carsForSale
 
+    local config = HC.Config.Vehicles
+
     for _, veh in ipairs(carsForSale) do
-        veh.price = HC.Config.Vehicles.GetPrice(veh.model)
+        veh.price = config.GetPrice(veh.model)
+        veh.trunkSpace = config.GetTrunkCapacity(veh.model)
     end
     TriggerClientEvent('hc:vehDealer:openMenu', source, vehicles)
 end)
