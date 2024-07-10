@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    overflow: hidden;
 }
 
 #hintContainer {
@@ -11,6 +12,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
+    height: 400px;
 }
 
 #hintContainer li {

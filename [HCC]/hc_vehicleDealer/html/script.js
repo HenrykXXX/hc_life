@@ -18,6 +18,17 @@ let selectedCar = null;
 
 function selectCar(car) {
     selectedCar = car;
+    fetch(`...`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('carName').textContent = data.name;
+            document.getElementById('carImage').src = data.image;
+            document.getElementById('carSpeed').textContent = `Speed: ${data.speed}`;
+            document.getElementById('carSeats').textContent = `Seats: ${data.seats}`;
+            document.getElementById('carTrunk').textContent = `Trunk space: ${data.trunk}`;
+            document.getElementById('carPrice').textContent = `Price: $${data.price}`;
+        })
+        .catch(error => console.error('Error fetching car details:', error));
 }
 
 function buyCar() {
@@ -42,3 +53,4 @@ document.addEventListener('keyup', function(event) {
         }).then(resp => resp.json()).then(resp => console.log(resp));
     }
 });
+
