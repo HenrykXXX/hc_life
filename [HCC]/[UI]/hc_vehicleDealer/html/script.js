@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const colorItems = document.querySelectorAll('.color-list .color');
+    colorItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const color = this.getAttribute('data-color');
+            if (selectedVeh) {
+                selectedVeh.color = color;
+                //selectVeh(selectedVeh); // Update display with selected color
+            }
+        });
+    });
+});
+
 // script.js
 window.addEventListener('message', function(event) {
     if (event.data.type === "show") {

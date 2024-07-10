@@ -22,29 +22,39 @@ end)
 
 RegisterNUICallback('buyVeh', function(data, cb)
     local veh = data.veh
-    TriggerServerEvent('hc:vehDealer:buyCar', veh)
+
+    TriggerServerEvent('hc:vehDealer:buyVeh', veh)
     cb('ok')
 end)
 
-RegisterNetEvent('hc:vehDealer:spawnCar')
-AddEventHandler('hc:vehDealer:spawnCar', function(carModel)
+RegisterNetEvent('hc:vehDealer:spawnVeh')
+AddEventHandler('hc:vehDealer:spawnVeh', function(vehData)
+    local vehModel = vehData.model
+    local vehColor = tonumber(vehData.color)
+    print(vehColor)
+
     local playerPed = PlayerPedId()
+    local coords = spawnPoint.spawnPoint
+    local heading = spawnPoint.heading
 
-    local coords = spawnPoint.spawnPoint --GetEntityCoords(playerPed)
-    local heading = spawnPoint.heading --GetEntityHeading(playerPed)
-    
-    RequestModel(carModel)
+    RequestModel(vehModel)
 
-    while not HasModelLoaded(carModel) do
+    while not HasModelLoaded(vehModel) do
         Wait(1)
     end
 
-    local vehicle = CreateVehicle(carModel, coords.x + 5, coords.y + 5, coords.z, heading, true, false)
-    print("veh id " .. vehicle)
+    local vehicle = CreateVehicle(vehModel, coords.x + 5, coords.y + 5, coords.z, heading, true, false)
     local netId = NetworkGetNetworkIdFromEntity(vehicle)
-    print("net id " .. netId)
-    TriggerServerEvent('hc:vehDealer:registerCar', netId)
 
+    -- Set vehicle color
+    --local primaryColor, secondaryColor = GetVehicleColours(vehicle)
+    
+    SetVehicleColours(vehicle, vehColor, vehColor)
+
+    -- Notify server about the spawned vehicle
+    TriggerServerEvent('hc:vehDealer:registerVeh', netId)
+
+    -- Warp player into the vehicle
     TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
 end)
 

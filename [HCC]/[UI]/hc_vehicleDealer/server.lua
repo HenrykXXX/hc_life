@@ -21,20 +21,20 @@ AddEventHandler('hc:vehDealer:getVehicles', function()
     TriggerClientEvent('hc:vehDealer:openMenu', source, vehicles)
 end)
 
-RegisterNetEvent('hc:vehDealer:buyCar')
-AddEventHandler('hc:vehDealer:buyCar', function(car)
+RegisterNetEvent('hc:vehDealer:buyVeh')
+AddEventHandler('hc:vehDealer:buyVeh', function(veh)
     local _source = source
 
     local money = HC.Bank.GetMoney(source)
-    if money >= car.price then
-        HC.Bank.RemoveMoney(source, car.price)
-        TriggerClientEvent('hc:vehDealer:spawnCar', _source, car.model)
+    if money >= veh.price then
+        HC.Bank.RemoveMoney(source, veh.price)
+        TriggerClientEvent('hc:vehDealer:spawnVeh', _source, veh)
     else
         print("not enoguh money")
     end
 end)
 
 RegisterNetEvent('hc:vehDealer:registerCar')
-AddEventHandler('hc:vehDealer:registerCar', function(veh)
+AddEventHandler('hc:vehDealer:registerVeh', function(veh)
     HC.Vehicles.AddVehicle(source, veh)
 end)
