@@ -34,7 +34,7 @@ AddEventHandler('hc:vehDealer:buyVeh', function(veh)
     end
 end)
 
-RegisterNetEvent('hc:vehDealer:registerCar')
-AddEventHandler('hc:vehDealer:registerVeh', function(veh)
-    HC.Vehicles.AddVehicle(source, veh)
+RegisterNetEvent('hc:vehDealer:registerVeh')
+AddEventHandler('hc:vehDealer:registerVeh', function(veh, data)
+    HC.Vehicles.AddVehicle(source, veh, data)
 end)

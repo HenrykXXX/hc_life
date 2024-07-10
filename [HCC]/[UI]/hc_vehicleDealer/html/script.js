@@ -33,6 +33,7 @@ function updateVehicles(vehs) {
         ul.appendChild(li);
     });
     selectVeh(firstVeh);
+    selectVeh.color = '0';
 }
 
 let selectedVeh = null;

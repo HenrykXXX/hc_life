@@ -22,7 +22,8 @@ end)
 
 RegisterNUICallback('buyVeh', function(data, cb)
     local veh = data.veh
-
+    veh.color = tonumber(veh.color)
+    
     TriggerServerEvent('hc:vehDealer:buyVeh', veh)
     cb('ok')
 end)
@@ -31,7 +32,6 @@ RegisterNetEvent('hc:vehDealer:spawnVeh')
 AddEventHandler('hc:vehDealer:spawnVeh', function(vehData)
     local vehModel = vehData.model
     local vehColor = tonumber(vehData.color)
-    print(vehColor)
 
     local playerPed = PlayerPedId()
     local coords = spawnPoint.spawnPoint
@@ -52,10 +52,9 @@ AddEventHandler('hc:vehDealer:spawnVeh', function(vehData)
     SetVehicleColours(vehicle, vehColor, vehColor)
 
     -- Notify server about the spawned vehicle
-    TriggerServerEvent('hc:vehDealer:registerVeh', netId)
+    TriggerServerEvent('hc:vehDealer:registerVeh', netId, vehData)
 
-    -- Warp player into the vehicle
-    TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+    TriggerEvent("hc:hint:show", "You bought " .. vehData.name)
 end)
 
 RegisterNUICallback('hide', function(data, cb)
