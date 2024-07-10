@@ -6,7 +6,7 @@ Citizen.CreateThread(function()
         {npcName = "Iron Processing", npcEvent = "hc:processing:start", npcModel = `a_m_m_business_01`, npcCoords = vector3(1778.0, 3310.0, 41.2), npcHeading = 270.0, extra = { proc = "ironore" }},
 
         {npcName = "Weapon Selector", npcEvent = "hc:showWeaponSelector", npcModel = `a_f_m_business_02`, npcCoords = vector3(-333.0, 6084.0, 31.0), npcHeading = 219.0, extra = {}},
-        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:callOpenMenu", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
+        {npcName = "Car Dealer", npcEvent = "hc:vehDealer:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-205.0, 6199.0, 31.5), npcHeading = 360.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6188.0, 31.5), npcHeading = 360.0, extra = {}},
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-207.0, 6184.0, 31.5), npcHeading = 360.0, extra = {}},
         {npcName = "Garage", npcEvent = "hc:garage:show", npcModel = `a_f_m_business_02`, npcCoords = vector3(-194.0, 6231.0, 31.2), npcHeading = 270.0, extra = { spawnPoint = vector3(-207.0, 6211.0, 31.0), heading = 251.0}},
