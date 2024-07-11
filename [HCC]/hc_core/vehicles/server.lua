@@ -1,6 +1,6 @@
 HC.Vehicles.last = nil
 
-function HC.Vehicles.AddVehicle(id, vehicleId)
+function HC.Vehicles.AddVehicle(id, vehicleId, vehData)
     local playerData = HC:GetPlayerData(id)
     if playerData then
         table.insert(playerData.vehicles, vehicleId)
@@ -31,15 +31,20 @@ function HC.Vehicles.AddVehicle(id, vehicleId)
                 currentWeight = 0,
                 maxWeight = vehCapacity
             },
+            color = {
+                primary = vehData.color,
+                secondary = vehData.color
+            },
             ownerKey = playerData.key,
             spawned = true
         }
 
         local vehicleData = HC.Vehicles[vehicleId]
         HC.Vehicles.last = vehicleId
-        HC.DB.Execute('INSERT INTO vehicles (model, trunk, owner, spawned) VALUES (@model, @trunk, @owner, @spawned)', {
+        HC.DB.Execute('INSERT INTO vehicles (model, trunk, color, owner, spawned) VALUES (@model, @trunk, @color, @owner, @spawned)', {
             ['@model'] = vehicleData.model,
             ['@trunk'] = json.encode(vehicleData.trunk),
+            ['@color'] = json.encode(vehicleData.color),
             ['@owner'] = vehicleData.ownerKey,
             ['@spawned'] = vehicleData.spawned
         }, function(rowsChanged)

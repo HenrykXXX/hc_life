@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+    color: white;
+    user-select: none;
+    display: none;
+}
+
+#carDealer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-around;
+    background-color: #00000096;
+    width: 600px;
+    height: 700px;
+    padding: 20px;
+}
+
+.car-list,
+.car-info {
+    border: 2px solid white;
+    padding: 10px 35px;
+}
+
+#carName {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.car-colors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1rem;
+    gap: 10px;
+}
+
+.color-list {
+    display: flex;
+    
+}
+
+.list {
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+li:hover{
+    background-color: #525252;
+}
+
+.btn-buy {
+    width: 100%;
+    padding: 10px;
+    background-color: #08c002;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.color{
+    width: 20px;
+    height: 20px;
+    border: none;
+    outline: none;
+    list-style: none;
+    margin-right: 3px;
+}
+
+
+.color-red{
+    background-color: red;
+}
+
+.color-green{
+    background-color: green;
+}
+
+.color-white{
+    background-color: white;
+}
+
+.color-black{
+    background-color: black;
+}
+
+.color-yellow{
+    background-color: yellow;
+}
+
+.color-blue{
+    background-color: blue;
+}
+
+img {
+    width: 200px;
+}
+
+
+.btn-buy:hover {
+    background-color: #09ff00;
+}
+
+.color:hover{
+    cursor: pointer;
+}
+
+.selected {
+    background-color: lightgray;
+}
