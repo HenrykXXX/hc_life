@@ -1,52 +1,54 @@
 * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.ui-bottom {
-    position: absolute;
-    top: 97%;
-    left: 50%;
-    transform: translate(-50%, -97%);
+body {
+    font-family: Arial, sans-serif;
+}
+
+.ui-bottom-right {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 60px;
+    flex-direction: column;
+    gap: 1vh;
     user-select: none;
 }
 
-.stats {
-    width: 100px;
-    height: 20px;
-    font-size: 3rem;
-    letter-spacing: 1px;
-    padding: 5px;
-    color: white;
-    border-radius: 15px;
-    position: relative;
+.stat-container {
+    width: 15vw;
+    height: 2vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
-.stats p {
-    position: absolute;
-    top: -45px;
-    left: -25px;
+.stat-bar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
-.health {
-    background-color: #d60000;
+.icon {
+    font-size: 2vh;
+    margin: 0 1vh;
+    z-index: 2;
 }
 
-.armor {
-    background-color: #1e90ff;
+.bar {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
 }
 
-.food {
-    background-color: #00b900;
-}
-
-.water {
-    background-color: #0000cc;
-}
-
-.energy {
-    background-color: #dada00;
-}
+.health .bar { background-color: #d60000; }
+.armor .bar { background-color: #1e90ff; }
+.food .bar { background-color: #00b900; }
+.water .bar { background-color: #0000cc; }
+.energy .bar { background-color: #dada00; }
