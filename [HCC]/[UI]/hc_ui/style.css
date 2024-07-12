@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+}
+
+.ui-bottom {
+    position: absolute;
+    top: 97%;
+    left: 50%;
+    transform: translate(-50%, -97%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 60px;
+    user-select: none;
+}
+
+.stats {
+    width: 100px;
+    height: 20px;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    padding: 5px;
+    color: white;
+    border-radius: 15px;
+    position: relative;
+}
+
+.stats p {
+    position: absolute;
+    top: -45px;
+    left: -25px;
+}
+
+.health {
+    background-color: #d60000;
+}
+
+.food {
+    background-color: #00b900;
+}
+
+.water {
+    background-color: #0000cc;
+}
+
+.energy {
+    background-color: #dada00;
+}
