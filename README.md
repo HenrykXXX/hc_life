@@ -48,7 +48,7 @@ If you have any ideas or you want to help, contact me or join our Discord. All p
 
 ## Contact
 
-**Email:** henrykxxx92@gmail.com
+- **Email:** henrykxxx92@gmail.com
 - **Discord:** [Join our Discord](https://discord.gg/Gpcfpmy6)
 
 ## License
