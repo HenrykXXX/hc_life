@@ -21,7 +21,9 @@ client_scripts {
     --vehicles--
     'vehicles/client.lua',
 
-    'utils/client.lua'
+    'utils/client.lua',
+
+    'player/client.lua'
 }
 
 server_scripts {
@@ -48,7 +50,9 @@ server_scripts {
     'bank/server.lua',
 
     --time--
-    'time/server.lua'
+    'time/server.lua',
+
+    'player/server.lua'
 }
 
 dependencies = {

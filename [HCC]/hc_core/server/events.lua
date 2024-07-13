@@ -53,6 +53,12 @@ AddEventHandler('playerJoining', function()
                 gameInfo = {
                     firstSpawn = true
                 },
+                stats = {
+                    health = 100,
+                    armor = 0,
+                    water = 75,
+                    food = 75,
+                },
                 money = playerData.money,
                 bankMoney = playerData.bank,
                 inventory = json.decode(playerData.inventory),
@@ -67,6 +73,12 @@ AddEventHandler('playerJoining', function()
             HC.PlayerData[src] = {
                 gameInfo = {
                     firstSpawn = true
+                },
+                stats = {
+                    health = 100,
+                    armor = 0,
+                    water = 75,
+                    food = 75,
                 },
                 money = 100000, -- Default money
                 bankMoney = 5000, -- Default bank money

@@ -1,4 +1,5 @@
 local isHudVisible = true
+local playerStats = nil
 
 Citizen.CreateThread(function()
     while true do
@@ -6,8 +7,14 @@ Citizen.CreateThread(function()
             local ped = PlayerPedId()
             local health = GetEntityHealth(ped) - 100
             local armor = GetPedArmour(ped)
-            local food = 75  -- Example value
-            local water = 80 -- Example value
+            local food = 0  -- Example value
+            local water = 0 -- Example value
+
+            if playerStats then
+                water = playerStats.water
+                food = playerStats.food
+            end
+
             local energy = 100 - GetPlayerSprintStaminaRemaining(PlayerId())
 
             SendNUIMessage({
@@ -23,12 +30,6 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Toggle HUD visibility
-RegisterCommand('hc.hud.toggle', function()
-    isHudVisible = not isHudVisible
-    SetNuiFocus(false, false)
-end, false)
-
 RegisterCommand('hc.hud.setarmor', function(source, args)
     local armorValue = tonumber(args[1])
     
@@ -43,3 +44,8 @@ RegisterCommand('hc.hud.setarmor', function(source, args)
         })
     end
 end, false)
+
+
+AddEventHandler("hc:hud:updateStats", function(stats)
+    playerStats = stats
+end)

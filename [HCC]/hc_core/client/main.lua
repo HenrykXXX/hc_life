@@ -32,4 +32,11 @@ AddEventHandler('playerSpawned', function()
     SetCanAttackFriendly(PlayerPedId(), true, false)
 end)
 
+CreateThread(function()
+    while true do
+        Wait(1000*5)
+        TriggerServerEvent("hc:core:player:tick");
+    end
+end)
+
 
