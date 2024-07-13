@@ -11,7 +11,7 @@ local spawnPoints = {
 RegisterNUICallback('selectSpawn', function(data, cb)
     local spawnIdx = data.spawnIndex
     if spawnPoints[spawnIdx] then
-        DisplayRadar(true)
+        --DisplayRadar(true)
         local pos = spawnPoints[spawnIdx]
         SetEntityCoords(PlayerPedId() , pos.x, pos.y, pos.z, false, false, false, false)
         SetNuiFocus(false, false)

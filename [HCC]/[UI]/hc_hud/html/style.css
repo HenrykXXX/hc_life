@@ -10,8 +10,8 @@ body {
 
 .ui-bottom-right {
     position: fixed;
-    bottom: 10px;
-    left: 40px;
+    bottom: 2%;
+    left: 2%;
     display: flex;
     flex-direction: column;
     gap: 1vh;
@@ -38,10 +38,9 @@ body {
 
 .icon {
     position: absolute;
-    left: -42px;
+    left: -4vh;
     font-size: 2.5vh;
     margin: 0 1vh;
-    z-index: 2;
 }
 
 .bar {
