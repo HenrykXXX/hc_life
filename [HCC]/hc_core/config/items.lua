@@ -38,6 +38,71 @@ HC.Config.Items = {
             TriggerClientEvent('hc:mine:start', src)
         end
     },
+    
+    --consumable items
+    waterBottle = {
+        name = "Water Bottle",
+        model = -1249748547,
+        basePrice = 10,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'water', 25)
+        end
+    },
+    sandwich = {
+        name = "Sandwich",
+        model = -1249748547,
+        basePrice = 15,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'food', 30)
+        end
+    },
+    apple = {
+        name = "Apple",
+        model = -1249748547,
+        basePrice = 5,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'food', 10)
+        end
+    },
+    energyBar = {
+        name = "Energy Bar",
+        model = -1249748547,
+        basePrice = 8,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'food', 20)
+        end
+    },
+    soda = {
+        name = "Soda",
+        model = -1249748547,
+        basePrice = 12,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'water', 15)
+        end
+    },
+    energyDrink = {
+        name = "Energy Drink",
+        model = -1249748547,
+        basePrice = 20,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'water', 20)
+        end
+    },
+    coffee = {
+        name = "Coffee",
+        model = -1249748547,
+        basePrice = 18,
+        weight = 1,
+        use = function(src)
+            TriggerEvent('hc:items:consume', src, 'water', 10)
+        end
+    }
 }
 
 local function findItem(name)

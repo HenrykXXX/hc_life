@@ -16,8 +16,8 @@ Citizen.CreateThread(function()
         {npcName = "Tuner Shop", npcEvent = "hc:tunerShop:open", npcModel = `a_f_m_business_02`, npcCoords = vector3(-1654, -3135, 13.9), npcHeading = 0.0, extra = {}},
         {npcName = "Bank", npcEvent = "hc:bank:show", npcModel = `a_m_m_business_01`, npcCoords = vector3(-1654, -3130, 13.9), npcHeading = 360.0, extra = {}},
          
-        --police airport
-        {npcName = "Officer", npcEvent = "hc:police:getGear", npcModel = `a_m_m_business_01`, npcCoords = vector3(-1658, -3130, 13.9), npcHeading = 360.0, extra = {}},
+        --police 
+        {npcName = "Officer", npcEvent = "hc:police:getGear", npcModel = `s_m_y_cop_01`, npcCoords = vector3(-449.0, 6012.4, 31.6), npcHeading = 311.0, extra = {}},
     }
 
     -- Load and spawn each NPC from the configuration, and create map markers

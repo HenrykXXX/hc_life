@@ -238,8 +238,9 @@ function updatePoints() {
 }
 
 function init() {
-  myCanvas.width = window.innerWidth;
-  myCanvas.height = window.innerHeight;
+  myCanvas.width = document.documentElement.clientWidth - 8;
+  myCanvas.height = document.documentElement.clientHeight - 20;
+  console.log(`${myCanvas.height} ${myCanvas.width}`);
 
   graph.dispose();
 

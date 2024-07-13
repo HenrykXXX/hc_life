@@ -3,7 +3,15 @@ HC.Config.Shops = {
         name = "market",
         items = {
             "pineapple",
-            "applecrate"
+            "applecrate",
+            'waterBottle',
+            'sandwich',
+            'apple',
+            'energyBar',
+            'soda',
+            'energyDrink',
+            'coffee'
+            
         }
     },
     {

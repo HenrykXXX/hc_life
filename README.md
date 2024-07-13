@@ -34,10 +34,6 @@ Edit mysql login data in hcl.cfg
 
 Start Your server!
 
-## Usage
-
-Once installed, the mod will automatically integrate with your FiveM server. To start using the mod, simply launch your FiveM server as usual. For detailed usage instructions and commands, refer to the USAGE.md file.
-
 ## Contributing
 
 Contributions are welcome! If you have ideas for new features, improvements, or bug fixes, feel free to fork the repository and submit a pull request. Please ensure your contributions align with the project's goals and coding standards.
@@ -47,6 +43,13 @@ Create a new branch (git checkout -b feature/your-feature)
 Commit your changes (git commit -am 'Add some feature')
 Push to the branch (git push origin feature/your-feature)
 Create a new Pull Request
+
+If you have any ideas or you want to help, contact me or join our Discord. All people who are willing to help are welcome!
+
+## Contact
+
+- **Email:** henrykxxx92@gmail.com
+- **Discord:** [Join our Discord](https://discord.gg/Gpcfpmy6)
 
 ## License
 
@@ -67,6 +70,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Contact
-
-For any questions, suggestions, or feedback, please open an issue in the repository or contact me directly at henrykxxx92@gmail.com
