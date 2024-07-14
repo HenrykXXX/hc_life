@@ -1,109 +1,105 @@
-body, html {
-    height: 100%;
-    margin: 0;
+body {
     font-family: Arial, sans-serif;
     background-color: transparent;
     color: white;
+    user-select: none;
+    display: none;
 }
 
-#container {
-    background-color: black;
-    width: 80%;
-    height: 80%;
-    padding: 20px;
+#garage {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 1px solid white;
-    border-radius: 3px;
-}
-
-#container #title {
-    background-color: blue;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    background-color: #00000096;
+    width: 600px;
+    height: 700px;
+    padding: 20px;
 }
 
-#garage-container {
-    display: flex;
-    flex: 1;
+.vehicle-list,
+.vehicle-info {
+    border: 2px solid white;
+    padding: 10px 35px;
 }
 
-.column {
-    flex: 1;
-    padding: 10px;
+#vehicleName {
+    text-align: center;
 }
 
-#garage-vehicle-container {
-    max-height: 60%;
+#garage-vehicle-list {
+    direction: rtl;
+    list-style-type: none;
+    padding: 0;
+    max-height: 600px; /* Set a fixed height to enable scrolling */
+    overflow: hidden;
     overflow-y: auto;
-    margin-top: 20px;
+    scrollbar-color: #6b6b6b #2b2b2b; /* Firefox */
+}
+
+#garage-vehicle-list::-webkit-scrollbar {
+    background-color: #2b2b2b;
+}
+
+#garage-vehicle-list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #6b6b6b;
+    min-height: 24px;
+    border: 3px solid #2b2b2b;
+}
+
+#garage-vehicle-list::-webkit-scrollbar-thumb:focus {
+    background-color: #959595;
+}
+
+#garage-vehicle-list::-webkit-scrollbar-thumb:active {
+    background-color: #959595;
+}
+
+#garage-vehicle-list::-webkit-scrollbar-thumb:hover {
+    background-color: #959595;
+}
+
+#garage-vehicle-list::-webkit-scrollbar-corner {
+    background-color: #2b2b2b;
+}
+
+.list {
+    margin-bottom: 10px;
+    cursor: pointer;
     border: 1px solid white;
     border-radius: 3px;
-}
-
-#garage-vehicle-list li {
     padding: 5px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+    text-align: center;
 }
 
-#garage-vehicle-list li:hover {
-    background-color: #444;
+.list:hover {
+    background-color: #525252;
 }
 
-#garage-vehicle-list li.selected {
-    background-color: #888;
-}
-
-.item-image {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-#weight-info {
-    margin-top: 10px;
-}
-
-button {
-    background-color: white;
-    color: black;
+.btn-get {
+    width: 100%;
+    padding: 10px;
+    background-color: #08c002;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 3px;
     border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
     cursor: pointer;
 }
 
-#get-vehicle-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+.btn-get:hover {
+    background-color: #09ff00;
 }
 
-#get-vehicle-button {
-    flex: 0 0 auto;
-    padding: 5px 10px;
+img {
+    width: 200px;
 }
 
-.garage-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    background-color: blue;
-}
-
-.garage-title h3 {
-    margin: 0;
-}
-
-.garage-title h4 {
-    margin: 0;
+.selected {
+    background-color: lightgray;
 }

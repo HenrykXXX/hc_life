@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <div id="title">
+    <div id="garage">
+        <div class="vehicle-list">
             <h1>Garage</h1>
+            <ul id="garage-vehicle-list">
+                <!-- Vehicle list will be populated dynamically -->
+            </ul>
         </div>
-        <div id="garage-container">
-            <div class="column">
-                <div id="garage-vehicle-container">
-                    <div class="garage-title">
-                        <h3>Vehicles</h3>
-                    </div>
-                    <ul id="garage-vehicle-list"></ul>
-                </div>
-                <div id="get-vehicle-container">
-                    <button id="get-vehicle-button">Get</button>
-                </div>
-            </div>
+
+        <div class="vehicle-info">
+            <h2 id="vehicleName">Vehicle Details</h2>
+            <img id="vehicleImage" src="https://static.wikia.nocookie.net/gtawiki/images/9/9e/Adder-GTAV-front.png/revision/latest?cb=20230402200727" alt="Vehicle image">
+            <p id="vehicleSpeed">Speed: --</p>
+            <p id="vehicleSeats">Seats: --</p>
+            <p id="vehicleTrunk">Trunk space: --</p>
+            <p id="vehicleState">State: --</p>
+            <p id="vehicle-price">Price: --</p>
+            <button id="get-vehicle-button" class="btn-get" onclick="getVehicle()">Get Vehicle</button>
         </div>
     </div>
     <script src="script.js"></script>

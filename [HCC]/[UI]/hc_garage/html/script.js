@@ -1,84 +1,63 @@
+let selectedVehicle = null;
+
 window.addEventListener('message', function(event) {
-    const type = event.data.type;
-
-    if (type === "show") {
-        updateGarage(event.data);
-        document.getElementById('container').style.display = 'flex';
+    if (event.data.type === "show") {
+        updateGarage(event.data.vehicles);
+        document.body.style.display = 'block';
     }
 });
 
-document.getElementById('get-vehicle-button').addEventListener('click', function() {
-    const selectedItem = document.querySelector('#garage-vehicle-list li.selected');
-    if (selectedItem) {
-        const model = selectedItem.getAttribute('data-model');
-        const key = selectedItem.getAttribute('data-id');
-        if (!isNaN(model)) {
-            closeGarage();
-            fetch(`https://${GetParentResourceName()}/getVehicle`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ model: model, key : key })
-            }).then(response => {
-                // Handle the response from the server if needed
-                console.log(response);
-            }).catch(error => {
-                console.error('Error buying item:', error);
-            });
-        } else {
-            console.log('Invalid buy amount');
-        }
-    } else {
-        console.log('No item selected');
-    }
-});
-
-
-function updateGarage(data) {
-    const garageVehicleList = document.getElementById('garage-vehicle-list');
-    garageVehicleList.innerHTML = ''; // Clear existing player items
-
-    data.vehicles.forEach(veh => {
+function updateGarage(vehicles) {
+    const ul = document.getElementById('garage-vehicle-list');
+    ul.innerHTML = '';
+    vehicles.forEach(veh => {
         const li = document.createElement('li');
-        const itemImage = document.createElement('img');
-        //itemImage.src = `images/${item[0]}.png`; // Assuming item images are stored in an "images" folder
-        itemImage.classList.add('item-image');
-        li.appendChild(itemImage);
-        li.innerHTML += `Veh id: ${veh.key} - model: ${veh.name} - spawned ${veh.spawned}`;
-        li.setAttribute('data-model', veh.model);
-        li.setAttribute('data-id', veh.key);
-        garageVehicleList.appendChild(li);
+        li.textContent = `${veh.name} - ID: ${veh.key}`;
+        li.className = 'list vehicle-listed';
+        li.onclick = () => selectVehicle(veh);
+        ul.appendChild(li);
     });
-
-}
-
-
-
-document.getElementById('garage-vehicle-list').addEventListener('click', function(event) {
-    if (event.target && event.target.tagName === 'LI') {
-        const selectedItem = document.querySelector('#garage-vehicle-list li.selected');
-        if (selectedItem) {
-            selectedItem.classList.remove('selected');
-        }
-        event.target.classList.add('selected');
+    if (vehicles.length > 0) {
+        selectVehicle(vehicles[0]);
     }
-});
-
-function closeGarage() {
-    document.getElementById('container').style.display = 'none';
-    // Notify the game to handle the close event
-    fetch(`https://${GetParentResourceName()}/hideGarage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
 }
 
+function selectVehicle(veh) {
+    selectedVehicle = veh;
+    document.getElementById('vehicleName').textContent = veh.name;
+    document.getElementById('vehicleSpeed').textContent = `Speed: ${veh.maxSpeed || '--'} km/h`;
+    document.getElementById('vehicleSeats').textContent = `Seats: ${veh.seats || '--'}`;
+    document.getElementById('vehicleTrunk').textContent = `Trunk space: ${veh.trunkSpace || '--'}kg`;
+    document.getElementById('vehicleState').textContent = `State: ${veh.spawned ? 'Spawned' : 'In Garage'}`;
+    document.getElementById('vehicle-price').textContent = `Model: ${veh.model}`;
+}
 
-document.addEventListener('keydown', function(event) {
+function getVehicle() {
+    if (selectedVehicle) {
+        fetch(`https://${GetParentResourceName()}/getVehicle`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ model: selectedVehicle.model, key: selectedVehicle.key })
+        }).then(response => {
+            console.log(response);
+            hideGarage();
+        }).catch(error => {
+            console.error('Error getting vehicle:', error);
+        });
+    }
+}
+
+function hideGarage() {
+    document.body.style.display = 'none';
+    fetch(`https://${GetParentResourceName()}/hideGarage`, {
+        method: 'POST'
+    }).then(resp => resp.json()).then(resp => console.log(resp));
+}
+
+document.addEventListener('keyup', function(event) {
     if (event.key === 'Escape' || event.keyCode === 27) {
-        closeGarage();
+        hideGarage();
     }
 });
